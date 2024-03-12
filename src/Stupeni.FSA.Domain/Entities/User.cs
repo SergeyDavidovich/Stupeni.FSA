@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Volo.Abp.Domain.Entities;
 
 namespace Stupeni.FSA.Entities
 {
@@ -6,8 +7,10 @@ namespace Stupeni.FSA.Entities
     /// Представляет собой пользователя.
     /// Пользователь приложения может осуществлять просмотр список доступных рейсов и бронировать их
     /// </summary>
-    public class User
+    public class User : Entity<int>
     {
+        private User() { }
+
         /// <summary>
         /// Уникальный идентификатор для рейса
         /// </summary>

@@ -11,9 +11,9 @@ namespace Stupeni.FSA.Entities
     /// </summary>
     public class Flight : AggregateRoot<int>
     {
-        internal Flight() { }
+        private Flight() { }
 
-        public Flight(int id, 
+        internal Flight(int id, 
             [NotNull] string aircraft     
             ) : base(id)
         {
@@ -53,7 +53,7 @@ namespace Stupeni.FSA.Entities
         /// <summary>
         /// Текущий статус рейса (например, задержан, прибыл вовремя, приземлился)
         /// </summary>
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// Место вылета рейса
@@ -69,6 +69,11 @@ namespace Stupeni.FSA.Entities
         /// Продолжительность полета
         /// </summary>
         public TimeSpan FlightTime { get; set; }
+
+        /// <summary>
+        /// Количество пересадок
+        /// </summary>
+        public int NumTransfers { get; set; }
 
         public ICollection<UserInFlight> UsersInFlights { get; set; }
 

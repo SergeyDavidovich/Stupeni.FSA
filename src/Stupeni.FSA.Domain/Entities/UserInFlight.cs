@@ -1,4 +1,5 @@
 ﻿using System;
+using Volo.Abp.Domain.Entities;
 
 namespace Stupeni.FSA.Entities
 {
@@ -6,8 +7,18 @@ namespace Stupeni.FSA.Entities
     /// Представляет собой данные о рейсах, забронированные пользователем
     /// Бронирование - это резервация места на определенном рейсе самолета
     /// </summary>
-    public class UserInFlight
+    public class UserInFlight : Entity
     {
+        private UserInFlight() { }
+
+        public UserInFlight(
+            int userId,
+            int flightTicketId)
+        {
+            UserId = userId;
+            FlightTicketId = flightTicketId;                
+        }
+
         /// <summary>
         /// Идентификатор пользователя, осуществляющего бронирование
         /// </summary>
@@ -34,5 +45,10 @@ namespace Stupeni.FSA.Entities
         public DateTime EndBookingDate { get; set; }
 
         public UserInFlightStatus Status { get; set; }
+
+        public override object?[] GetKeys()
+        {
+            return [UserId, FlightTicketId];
+        }
     }
 }
