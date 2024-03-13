@@ -10,7 +10,7 @@ using Volo.Abp.Domain.Services;
 namespace Stupeni.FSA.EntityManagers
 {
     #region Business rules definition
-    // №1. Добавление рейсов. Рейс не может быть добавлен, если разница между добавляемой датой STD и текущей датой меньше часа
+    // №1. Добавление рейсов. Рейс не может быть добавлен, если разница между добавляемой датой STD и текущей датой меньше трех часов
     #endregion
     public class FlightManager : DomainService, IFlightRepository
     {
@@ -59,7 +59,6 @@ namespace Stupeni.FSA.EntityManagers
             if (timeDifference.TotalHours < 1)
                 throw new Exception("STD cannot be set if the difference between the added STD date and the current date is less than an hour.");
         }
-
         #endregion
     }
 }

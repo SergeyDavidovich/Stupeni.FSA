@@ -1,4 +1,5 @@
 ﻿using System;
+using Stupeni.FSA.Enums;
 using Volo.Abp.Domain.Entities;
 
 namespace Stupeni.FSA.Entities

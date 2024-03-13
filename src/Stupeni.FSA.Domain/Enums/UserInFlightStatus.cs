@@ -1,4 +1,4 @@
-﻿namespace Stupeni.FSA
+﻿namespace Stupeni.FSA.Enums
 {
     public enum UserInFlightStatus
     {
