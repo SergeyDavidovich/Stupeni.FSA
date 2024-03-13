@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Volo.Abp;
 using Volo.Abp.Domain.Entities;
 
 namespace Stupeni.FSA.Entities
@@ -9,87 +8,48 @@ namespace Stupeni.FSA.Entities
     /// <summary>
     /// Представляет собой рейс. Рейс - это запланированное перемещение самолета от одного аэропорта к другому 
     /// </summary>
-    public class Flight : AggregateRoot<int>
+    public class Flight : Entity<string>
     {
         private Flight() { }
 
-        internal Flight(int id, 
-            [NotNull] string aircraft     
-            ) : base(id)
+        internal Flight(string flightNumber,
+            [NotNull] int bookingId) : base(flightNumber) 
         {
-            SetAircraft(aircraft);
+            BookingId = bookingId;
         }
 
         /// <summary>
-        /// Дата проведения полета
+        /// Дни полета. Может быть в диапозоне от 1 до 7, где 1 - это понедельник, а 7 - это воскресенье 
         /// </summary>
-        public DateTime Date { get; set; }
+        public List<int> DaysOfOperation { get; set; }
 
         /// <summary>
-        /// Название авиакомпании
+        /// Город вылета
         /// </summary>
-        public string AirlineName { get; set; }
+        public string DepartureCity { get; set; }
 
         /// <summary>
-        /// Тип или регистрационный номер воздушного судна, использовавшегося для полета
+        /// Город прибытия
         /// </summary>
-        public string Aircraft { get; set; }
+        public string DestinationCity { get; set; }
 
         /// <summary>
-        /// Запланированное время отправления (STD)
+        /// Время вылета
         /// </summary>
-        public DateTime STD { get; set; }
+        public DateTime DepartureTime { get; set; }
 
         /// <summary>
-        /// Фактическое время отправления (ATD)
+        /// Время прилёта
         /// </summary>
-        public DateTime ATD { get; set; }
+        public DateTime ArrivalTime { get; set; }
 
         /// <summary>
-        /// Запланированное время прибытия (STA)
+        /// Название перевозчика. Например, Uzbekistan Airways
         /// </summary>
-        public DateTime STA { get; set; }
+        public string CarrierName { get; set; }
 
-        /// <summary>
-        /// Текущий статус рейса (например, задержан, прибыл вовремя, приземлился)
-        /// </summary>
-        public string? Status { get; set; }
+        public int BookingId { get; private set; }
 
-        /// <summary>
-        /// Место вылета рейса
-        /// </summary>
-        public string From { get; set; }
-
-        /// <summary>
-        /// Пункт назначения полета
-        /// </summary>
-        public string To { get; set; }
-
-        /// <summary>
-        /// Продолжительность полета
-        /// </summary>
-        public TimeSpan FlightTime { get; set; }
-
-        /// <summary>
-        /// Количество пересадок
-        /// </summary>
-        public int NumTransfers { get; set; }
-
-        public ICollection<UserInFlight> UsersInFlights { get; set; }
-
-        /// <summary>
-        /// Присвоение типа или регистрационного номера воздушного судна.
-        /// Присвоение осуществляется после проверки параметра на null, наличие пробелов
-        /// и на количество символов, которое не должно превышать разрешенное количество символов
-        /// </summary>
-        /// <param name="aircraft">Тип или регистрационный номер воздушного судна, использовавшегося для полета</param>
-        private void SetAircraft(string aircraft)
-        {
-            Aircraft = Check.NotNullOrWhiteSpace(
-                aircraft,
-                nameof(aircraft),
-                minLength: FlightConsts.MinAircraftLength,
-                maxLength: FlightConsts.MaxAircraftLength);
-        }
+        public Booking Booking { get; set; }
     }
 }
