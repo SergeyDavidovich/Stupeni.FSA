@@ -5,6 +5,7 @@ using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -40,7 +41,6 @@ public class FSADbContext :
     // Tenant Management
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
-
     #endregion
 
     public FSADbContext(DbContextOptions<FSADbContext> options)
@@ -62,7 +62,10 @@ public class FSADbContext :
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
 
-        builder.Entity<Flight>()
-            .HasOne(x => x.Booking).WithMany(y=>y.Flights);
+        builder.Entity<Booking>(x =>
+        {
+            x.HasOne(y => y.Flight).WithMany().HasForeignKey(x => x.FlightNumber);
+            x.ConfigureByConvention();
+        });
     }
 }

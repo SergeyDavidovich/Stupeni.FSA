@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using Volo.Abp.Domain.Entities;
+﻿using System.Collections.Generic;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Stupeni.FSA.Entities
+namespace Stupeni.FSA.Flights
 {
-    /// <summary>
-    /// Представляет собой рейс. Рейс - это запланированное перемещение самолета от одного аэропорта к другому 
-    /// </summary>
-    public class Flight : Entity<string>
+    public class SearchFlightDto
     {
-        private Flight() { }
-
-        internal Flight(string flightNumber) : base(flightNumber) { }
+        /// <summary>
+        /// Номер рейса
+        /// </summary>
+        [Required]
+        public string flightNumber {  get; set; }
 
         /// <summary>
         /// Дни полета. Может быть в диапозоне от 1 до 7, где 1 - это понедельник, а 7 - это воскресенье 
@@ -42,5 +41,6 @@ namespace Stupeni.FSA.Entities
         /// Название перевозчика. Например, Uzbekistan Airways
         /// </summary>
         public string CarrierName { get; set; }
+
     }
 }

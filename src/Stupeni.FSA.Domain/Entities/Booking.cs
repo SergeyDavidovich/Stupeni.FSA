@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using Volo.Abp.Domain.Entities;
 
 namespace Stupeni.FSA.Entities
 {
     /// <summary>
-    /// Представляет собой данные о рейсах, забронированные пользователем
+    /// Представляет собой данные о бронированных билетах на рейс
     /// Бронирование - это резервация места на определенном рейсе самолета
     /// </summary>
     public class Booking : Entity<int>
@@ -13,28 +12,15 @@ namespace Stupeni.FSA.Entities
         private Booking() { }
 
         public Booking(int id,
-            string flightId) : base(id)
+            string flightNumber) : base(id)
         {
-            FlightId = flightId;                
+            FlightNumber = flightNumber;                
         }
 
         /// <summary>
-        /// Идентификатор забронирование билета на рейс
+        /// Дата бронирования
         /// </summary>
-        public string FlightId { get; set; }
-
-        public Flight Flight { get; set; }
-
-        /// <summary>
-        /// Дата начала бронирования рейс
-        /// </summary>
-        public DateTime StartBookingDate { get; set; }
-
-        /// <summary>
-        /// Дата окончания бронирования рейса.
-        /// Если бронированный рейс не оплачивается до окончания EndBookingDate, то бронь отменяется
-        /// </summary>
-        public DateTime EndBookingDate { get; set; }
+        public DateTime BookingDate { get; set; }
 
         /// <summary>
         /// Является ли билет зарезервированным пользователем. 
@@ -43,6 +29,11 @@ namespace Stupeni.FSA.Entities
         /// </summary>
         public bool IsReserved { get; set; }
 
-        public ICollection<Flight> Flights { get; set;}
+        /// <summary>
+        /// Идентификатор забронированного билета на рейс
+        /// </summary>
+        public string FlightNumber { get; private set; }
+
+        public Flight Flight { get; set;}
     }
 }
