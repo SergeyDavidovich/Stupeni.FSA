@@ -64,7 +64,7 @@ public class FSADbContext :
 
         builder.Entity<Flight>(x =>
         {
-            x.HasOne(y => y.Booking).WithMany(y=>y.Flighs);
+            x.HasOne(y => y.Booking).WithMany(y=>y.Flights);
             x.ConfigureByConvention();
         });
     }
