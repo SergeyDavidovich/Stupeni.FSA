@@ -32,7 +32,7 @@ namespace Stupeni.FSA.Entities
         /// <summary>
         /// Навигационное свойство
         /// </summary>
-        public ICollection<Flight> Flights { get; internal set; }
+        public IList<Flight> Flights { get; internal set; } = new List<Flight>();
 
         public double Price
         {
