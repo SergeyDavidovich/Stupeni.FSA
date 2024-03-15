@@ -12,15 +12,12 @@ namespace Stupeni.FSA.Entities
     {
         private Flight() { }
 
-        internal Flight(string id ,string flightNumber): base(id)
-        {
-            FlightNumber = flightNumber;
-        }
+        internal Flight(string id) : base(id) { }
 
         /// <summary>
-        /// Идентификатор рейса
+        /// Номер рейса
         /// </summary>
-        public string FlightNumber { get; private set; }
+        public string FlightNumber { get; set; }
 
         /// <summary>
         /// Дни полета. Может быть в диапозоне от 1 до 7, где 1 - это понедельник, а 7 - это воскресенье 
@@ -53,8 +50,8 @@ namespace Stupeni.FSA.Entities
         public string CarrierName { get; set; }
 
         /// <summary>
-        /// Количество пересадок
+        /// Навигационное свойство
         /// </summary>
-        public int CountTransfers { get; set; }
+        public Booking Booking { get; set; }
     }
 }

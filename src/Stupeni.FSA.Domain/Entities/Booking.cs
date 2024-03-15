@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Volo.Abp.Domain.Entities;
 
 namespace Stupeni.FSA.Entities
@@ -23,17 +25,13 @@ namespace Stupeni.FSA.Entities
         public DateTime BookingDate { get; set; }
 
         /// <summary>
-        /// Является ли билет зарезервированным пользователем. 
-        /// True - если резервация всё ещё действительна
-        /// False - если резервация не действительна
-        /// </summary>
-        public bool IsReserved { get; set; }
-
-        /// <summary>
         /// Идентификатор забронированного билета на рейс
         /// </summary>
-        public string FlightNumber { get; private set; }
+        public ICollection<int> FlightId { get; private set; }
 
-        public Flight Flight { get; set;}
+        /// <summary>
+        /// Навигационное свойство
+        /// </summary>
+        public ICollection<Flight> Flighs { get; set;}
     }
 }

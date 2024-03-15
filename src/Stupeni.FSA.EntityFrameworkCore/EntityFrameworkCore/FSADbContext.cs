@@ -62,9 +62,9 @@ public class FSADbContext :
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
 
-        builder.Entity<Booking>(x =>
+        builder.Entity<Flight>(x =>
         {
-            x.HasOne(y => y.Flight).WithMany().HasForeignKey(x => x.FlightNumber);
+            x.HasOne(y => y.Booking).WithMany(y=>y.Flighs);
             x.ConfigureByConvention();
         });
     }
