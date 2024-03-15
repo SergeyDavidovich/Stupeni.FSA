@@ -1,5 +1,6 @@
 ﻿using Stupeni.FSA.Entities;
 using Stupeni.FSA.EntityManagers.Interfaces;
+using Stupeni.FSA.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -24,7 +25,7 @@ namespace Stupeni.FSA.EntityManagers
             foreach(var flight in bookedFlights)
             {
                 await ThrowIfFlightNotOperatingOnBookingDate(flight.Id, bookingDate, cancellationToken);
-                booking.Flights.Add(flight);
+                booking.AddFlight(flight);
             }
 
             return booking;
@@ -38,13 +39,13 @@ namespace Stupeni.FSA.EntityManagers
         private async Task ThrowIfFlightNotOperatingOnBookingDate(int flightId, DateTime bookingDate, CancellationToken token)
         {
             // найти рейс по flightNumber, если рейс по flightNumber, то выдать Exception
-            var flight = await _flightRepository.FirstOrDefaultAsync(x => x.Id == flightId, token)
+            var flight = await _flightRepository.FindAsync(flightId, cancellationToken: token)
                 ?? throw new Exception($"Flight number {flightId} has not been found.");
 
             // проверка даты бронирования в расписании рейсов
             var matchingFlight = flight.DaysOfOperation.Contains(bookingDate.DayOfWeek);
 
-            if (!matchingFlight) { throw new Exception($"Flights are not operated on the specified date."); }
+            if (!matchingFlight) { throw new FlightNotOperatOnBookedDate($"Flights are not operated on the specified date."); }
         }
     }
 }

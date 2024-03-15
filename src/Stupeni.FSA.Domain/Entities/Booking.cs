@@ -27,7 +27,7 @@ namespace Stupeni.FSA.Entities
 
         public Guid UserId { get; }
 
-        public ICollection<string> FlightIds { get; set; }
+        public IList<int> FlightIds { get; set; } = new List<int>();
 
         /// <summary>
         /// Навигационное свойство
@@ -40,6 +40,12 @@ namespace Stupeni.FSA.Entities
             {
                 return Flights.Sum(x => x.Price);
             }
+        }
+
+        public void AddFlight(Flight flight)
+        {
+            Flights.Add(flight);
+            FlightIds.Add(flight.Id);
         }
     }
 }

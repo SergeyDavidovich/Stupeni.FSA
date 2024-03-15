@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Stupeni.FSA.Booking
+namespace Stupeni.FSA.Booking.Entity
 {
     public class BookingTests
     {
@@ -21,7 +21,7 @@ namespace Stupeni.FSA.Booking
 
             var userId = Guid.NewGuid();
 
-            var booking = new Stupeni.FSA.Entities.Booking(Guid.NewGuid(), userId, DateTime.Now);
+            var booking = new Entities.Booking(Guid.NewGuid(), userId, DateTime.Now);
             booking.Flights.Add(flight1);
             booking.Flights.Add(flight2);
 

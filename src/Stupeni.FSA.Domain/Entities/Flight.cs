@@ -22,7 +22,7 @@ namespace Stupeni.FSA.Entities
         /// <summary>
         /// Дни полета
         /// </summary>
-        public List<DayOfWeek> DaysOfOperation { get; set; }
+        public List<DayOfWeek> DaysOfOperation { get; set; } = new List<DayOfWeek>();
 
         /// <summary>
         /// Город вылета
