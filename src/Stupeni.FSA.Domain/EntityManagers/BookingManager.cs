@@ -18,12 +18,12 @@ namespace Stupeni.FSA.EntityManagers
             _flightRepository = flightRepository;
         }
 
-        public async Task<Booking> CreateBookingAsync(DateTime bookingDate, IEnumerable<Flight> bookedFlights, CancellationToken cancellationToken)
+        public async Task<Booking> CreateBookingAsync(DateTime bookingDate, Guid userId, IEnumerable<Flight> bookedFlights, CancellationToken cancellationToken)
         {
-            var booking = new Booking(Guid.NewGuid(), bookingDate);
+            var booking = new Booking(Guid.NewGuid(), userId, bookingDate);
             foreach(var flight in bookedFlights)
             {
-                await ThrowIfFlightNotOperatingOnBookingDate(flight.FlightNumber, bookingDate, cancellationToken);
+                await ThrowIfFlightNotOperatingOnBookingDate(flight.Id, bookingDate, cancellationToken);
                 booking.Flights.Add(flight);
             }
 
@@ -33,9 +33,9 @@ namespace Stupeni.FSA.EntityManagers
         /// <summary>
         /// Проверка на доступность бронирования билета на рейс по указанной дате
         /// </summary>
-        /// <param name="flightNumber">Бронируемый номер рейса </param>
+        /// <param name="flightId">Бронируемый номер рейса </param>
         /// <param name="bookingDate">Дата бронирования</param>
-        private async Task ThrowIfFlightNotOperatingOnBookingDate(string flightNumber, DateTime bookingDate, CancellationToken token)
+        private async Task ThrowIfFlightNotOperatingOnBookingDate(int flightId, DateTime bookingDate, CancellationToken token)
         {
             // найти рейс по flightNumber, если рейс по flightNumber, то выдать Exception
             var flight = await _flightRepository.FirstOrDefaultAsync(x => x.Id == flightId, token)
