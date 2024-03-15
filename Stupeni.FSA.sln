@@ -5,6 +5,10 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stupeni.FSA.Domain", "src\Stupeni.FSA.Domain\Stupeni.FSA.Domain.csproj", "{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volo.Abp.AspNetCore.Components.Web.BasicTheme", "packages\Volo.Abp.AspNetCore.Components.Web.BasicTheme\\Volo.Abp.AspNetCore.Components.Web.BasicTheme.csproj", "{c6780c6c-81e6-4c1e-9eeb-d225bdbe8385}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme", "packages\Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme\\Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme.csproj", "{341509e2-e1a2-4c60-847c-aed4dd7e622a}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stupeni.FSA.Application", "src\Stupeni.FSA.Application\Stupeni.FSA.Application.csproj", "{1A94A50E-06DC-43C1-80B5-B662820EC3EB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stupeni.FSA.EntityFrameworkCore", "src\Stupeni.FSA.EntityFrameworkCore\Stupeni.FSA.EntityFrameworkCore.csproj", "{C956DD76-69C8-4A9C-83EA-D17DF83340FD}"
@@ -48,6 +52,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{c6780c6c-81e6-4c1e-9eeb-d225bdbe8385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{c6780c6c-81e6-4c1e-9eeb-d225bdbe8385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{c6780c6c-81e6-4c1e-9eeb-d225bdbe8385}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{c6780c6c-81e6-4c1e-9eeb-d225bdbe8385}.Release|Any CPU.Build.0 = Release|Any CPU
+		{341509e2-e1a2-4c60-847c-aed4dd7e622a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{341509e2-e1a2-4c60-847c-aed4dd7e622a}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{341509e2-e1a2-4c60-847c-aed4dd7e622a}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{341509e2-e1a2-4c60-847c-aed4dd7e622a}.Release|Any CPU.Build.0 = Release|Any CPU
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -113,6 +125,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{c6780c6c-81e6-4c1e-9eeb-d225bdbe8385} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
+		{341509e2-e1a2-4c60-847c-aed4dd7e622a} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
 		{1A94A50E-06DC-43C1-80B5-B662820EC3EB} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
 		{C956DD76-69C8-4A9C-83EA-D17DF83340FD} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
