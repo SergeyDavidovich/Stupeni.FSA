@@ -8,11 +8,11 @@ namespace Stupeni.FSA.Entities
     /// Представляет собой рейс. 
     /// Рейс - это запланированное перемещение самолета от одного аэропорта к другому 
     /// </summary>
-    public class Flight : Entity<string>
+    public class Flight : Entity<int>
     {
         private Flight() { }
 
-        internal Flight(string id) : base(id) { }
+        internal Flight(int id) : base(id) { }
 
         /// <summary>
         /// Номер рейса
