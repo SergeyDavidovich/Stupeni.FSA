@@ -14,15 +14,18 @@ namespace Stupeni.FSA.Entities
     {
         private Booking() { }
 
-        public Booking(Guid id, DateTime bookingDate) : base(id)
+        public Booking(Guid id, Guid userId, DateTime bookingDate) : base(id)
         {
             BookingDate = bookingDate;
+            UserId = userId;
         }
 
         /// <summary>
         /// Дата бронирования
         /// </summary>
         public DateTime BookingDate { get; private set; }
+
+        public Guid UserId { get; }
 
         public ICollection<string> FlightIds { get; set; }
 

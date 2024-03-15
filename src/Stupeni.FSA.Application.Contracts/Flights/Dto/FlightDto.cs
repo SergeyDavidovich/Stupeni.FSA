@@ -13,7 +13,7 @@ namespace Stupeni.FSA.Flights.Dto
         /// <summary>
         /// Дни полета
         /// </summary>
-        public List<int> DaysOfOperation { get; set; }
+        public List<DayOfWeek> DaysOfOperation { get; set; }
 
         /// <summary>
         /// Город вылета
