@@ -19,7 +19,7 @@ namespace Stupeni.FSA.EntityManagers
 
         public async Task<Booking> CreateAsync(Booking userInFlight, CancellationToken token)
         {
-            await IsBookingDateAvailable(userInFlight.FlightNumber, userInFlight.BookingDate, token);
+            //await IsBookingDateAvailable(userInFlight.FlightNumber, userInFlight.BookingDate, token);
             return userInFlight;
         }
 
