@@ -29,13 +29,13 @@ namespace Stupeni.FSA.Entities
         /// <summary>
         /// Навигационное свойство
         /// </summary>
-        public ICollection<Flight> Fligths { get; internal set; }
+        public ICollection<Flight> Flights { get; internal set; }
 
         public double Price
         {
             get
             {
-                return Fligths.Sum(x => x.Price);
+                return Flights.Sum(x => x.Price);
             }
         }
     }

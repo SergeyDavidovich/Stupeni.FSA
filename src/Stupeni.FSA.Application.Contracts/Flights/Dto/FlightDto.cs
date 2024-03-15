@@ -11,7 +11,7 @@ namespace Stupeni.FSA.Flights.Dto
         public string FlightNumber { get; set; }
 
         /// <summary>
-        /// Дни полета. Может быть в диапозоне от 1 до 7, где 1 - это понедельник, а 7 - это воскресенье 
+        /// Дни полета
         /// </summary>
         public List<int> DaysOfOperation { get; set; }
 

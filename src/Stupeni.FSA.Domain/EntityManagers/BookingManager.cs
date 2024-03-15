@@ -25,7 +25,7 @@ namespace Stupeni.FSA.EntityManagers
             foreach(var flight in bookedFlights)
             {
                 await ThrowIfFlightNotOperatingOnBookingDate(flight.FlightNumber, bookingDate, cancellationToken);
-                booking.Fligths.Add(flight);
+                booking.Flights.Add(flight);
             }
 
             return booking;
