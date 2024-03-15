@@ -9,7 +9,7 @@ namespace Stupeni.FSA.Booking
 {
     public interface IBookingApplicationService : IApplicationService
     {
-        public Task BookFlights(CreateBookingDto dto);
+        public Task<BookingDto> BookFlights(CreateBookingDto dto);
 
         public Task<IEnumerable<BookingDto>> GetBookings(Guid userId);
     }

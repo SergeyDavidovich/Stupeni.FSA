@@ -9,7 +9,7 @@ using Volo.Abp.Application.Services;
 
 namespace Stupeni.FSA.Flights
 {
-    public interface IFlightAppService : IApplicationService
+    public interface IFlightApplicationService : IApplicationService
     {
         Task<IEnumerable<FlightDto>> GetFlights(DateTime departureDate, string deaprtureCity, string destinationCity, DateTime? arrivalDate = null);
     }
