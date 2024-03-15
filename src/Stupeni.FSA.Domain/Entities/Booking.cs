@@ -14,7 +14,7 @@ namespace Stupeni.FSA.Entities
     {
         private Booking() { }
 
-        public Booking(Guid id, DateTime bookingDate) : base(id) 
+        public Booking(Guid id, DateTime bookingDate) : base(id)
         {
             BookingDate = bookingDate;
         }
@@ -24,16 +24,18 @@ namespace Stupeni.FSA.Entities
         /// </summary>
         public DateTime BookingDate { get; private set; }
 
+        public ICollection<string> FlightIds { get; set; }
+
         /// <summary>
         /// Навигационное свойство
         /// </summary>
-        public ICollection<Flight> Flighs { get; internal set; }
+        public ICollection<Flight> Fligths { get; internal set; }
 
-        public double Price 
+        public double Price
         {
             get
             {
-                return Flighs.Sum(x => x.Price);
+                return Fligths.Sum(x => x.Price);
             }
         }
     }
