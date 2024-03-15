@@ -13,11 +13,7 @@ namespace Stupeni.FSA.Entities
     {
         private Booking() { }
 
-        public Booking(int id,
-            string flightNumber) : base(id)
-        {
-            FlightNumber = flightNumber;                
-        }
+        public Booking(int id) : base(id) { }
 
         /// <summary>
         /// Дата бронирования
