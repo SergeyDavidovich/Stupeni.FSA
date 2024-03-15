@@ -1,26 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Volo.Abp.Domain.Entities;
 
-namespace Stupeni.FSA.Entities
+namespace Stupeni.FSA.Flights.Dto
 {
-    /// <summary>
-    /// Представляет собой рейс. 
-    /// Рейс - это запланированное перемещение самолета от одного аэропорта к другому 
-    /// </summary>
-    public class Flight : Entity<string>
+    public class FlightDto
     {
-        private Flight() { }
-
-        internal Flight(string id ,string flightNumber): base(id)
-        {
-            FlightNumber = flightNumber;
-        }
-
         /// <summary>
-        /// Идентификатор рейса
+        /// Номер рейса
         /// </summary>
-        public string FlightNumber { get; private set; }
+        public string FlightNumber { get; set; }
 
         /// <summary>
         /// Дни полета. Может быть в диапозоне от 1 до 7, где 1 - это понедельник, а 7 - это воскресенье 
@@ -38,14 +26,14 @@ namespace Stupeni.FSA.Entities
         public string DestinationCity { get; set; }
 
         /// <summary>
-        /// Время вылета. Часы и минуты
+        /// Время вылета
         /// </summary>
-        public TimeSpan DepartureTime { get; set; }
+        public DateTime DepartureTime { get; set; }
 
         /// <summary>
-        /// Время прилёта. Часы и минуты
+        /// Время прилёта
         /// </summary>
-        public TimeSpan ArrivalTime { get; set; }
+        public DateTime ArrivalTime { get; set; }
 
         /// <summary>
         /// Название перевозчика. Например, Uzbekistan Airways
