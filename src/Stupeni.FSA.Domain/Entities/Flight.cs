@@ -53,5 +53,7 @@ namespace Stupeni.FSA.Entities
         /// Навигационное свойство
         /// </summary>
         public Booking Booking { get; set; }
+
+        public double Price { get; set; }
     }
 }
