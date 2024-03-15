@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Volo.Abp.Domain.Entities;
 
 namespace Stupeni.FSA.Entities
@@ -9,25 +10,31 @@ namespace Stupeni.FSA.Entities
     /// Представляет собой данные о бронированных билетах на рейс
     /// Бронирование - это резервация места на определенном рейсе
     /// </summary>
-    public class Booking : Entity<int>
+    public class Booking : Entity<Guid>
     {
         private Booking() { }
 
-        public Booking(int id) : base(id) { }
+        public Booking(Guid id, DateTime bookingDate) : base(id) 
+        {
+            BookingDate = bookingDate;
+        }
 
         /// <summary>
         /// Дата бронирования
         /// </summary>
-        public DateTime BookingDate { get; set; }
-
-        /// <summary>
-        /// Идентификатор забронированного билета на рейс
-        /// </summary>
-        public ICollection<int> FlightId { get; private set; }
+        public DateTime BookingDate { get; private set; }
 
         /// <summary>
         /// Навигационное свойство
         /// </summary>
-        public ICollection<Flight> Flighs { get; set;}
+        public ICollection<Flight> Flighs { get; internal set; }
+
+        public double Price 
+        {
+            get
+            {
+                return Flighs.Sum(x => x.Price);
+            }
+        }
     }
 }
