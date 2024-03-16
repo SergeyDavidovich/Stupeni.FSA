@@ -5,10 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
+using Volo.Abp.DependencyInjection;
 
 namespace Stupeni.FSA.DataSource
 {
-    public class WorldwideFlightsSource : IWorldwideFlightsSource
+    public class WorldwideFlightsDataSource : IWorldwideFlightsSource, ISingletonDependency
     {
         public async Task<IEnumerable<FlightDto>> GetFlightsAsync()
         {
