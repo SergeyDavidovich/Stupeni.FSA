@@ -1,0 +1,38 @@
+﻿@using Stupeni.FSA.Flights.Dto
+<MudPaper>
+    <MudGrid Class="p-3">
+        <MudItem xs="12">
+            <MudDataGrid T="FlightDto" Items="@Flights" Dense ColumnResizeMode="ResizeMode.Container" @bind-SelectedItems="@selectedFlights">
+                <Columns>
+                    <SelectColumn />
+                    <PropertyColumn Property="x => x.FlightNumber" Title="Flight number" />
+                    <PropertyColumn Property="x => x.CarrierName" Title="Carrier name" />
+                    <PropertyColumn Property="x => x.DepartureCity" Title="Departure city" />
+                    <PropertyColumn Property="x => x.DepartureTime" />
+                    <PropertyColumn Property="x => x.DestinationCity" Title="Destination city" />
+                    <PropertyColumn Property="x => x.Price" Title="Price" />
+                </Columns>
+            </MudDataGrid>
+        </MudItem>
+        <MudItem xs="12" Class="d-flex justify-center">
+            <MudButton FullWidth="true" Variant="@Variant.Filled" OnClick="BookFlightClicked">
+                Book flights
+            </MudButton>
+        </MudItem>
+    </MudGrid>
+</MudPaper>
+
+@code {
+    [Parameter]
+    public List<FlightDto> Flights{ get; set; }
+
+    [Parameter]
+    public EventCallback<IEnumerable<FlightDto>> BookButtonOnClicked{ get; set; }
+
+    private HashSet<FlightDto> selectedFlights = new HashSet<FlightDto>();
+
+    private async Task BookFlightClicked()
+    {
+        await BookButtonOnClicked.InvokeAsync(selectedFlights.ToList());
+    }
+}

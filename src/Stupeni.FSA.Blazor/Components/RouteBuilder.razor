@@ -47,6 +47,8 @@
     private double? minimalPrice;
     private double? maximalPrice;
 
+    public DateTime? DepartureTime{ get => departureDate; }
+
     private async Task SearchFlightClicked()
     {
         BookingData bookingData = new BookingData();
