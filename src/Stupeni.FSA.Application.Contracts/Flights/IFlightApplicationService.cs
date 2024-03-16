@@ -1,7 +1,5 @@
-﻿using Stupeni.FSA.Booking.Dto;
-using Stupeni.FSA.Flights.Dto;
+﻿using Stupeni.FSA.Flights.Dto;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +9,6 @@ namespace Stupeni.FSA.Flights
 {
     public interface IFlightApplicationService : IApplicationService
     {
-        Task<IEnumerable<FlightDto>> GetFlights(DateTime departureDate, string deaprtureCity, string destinationCity, DateTime? arrivalDate = null);
+        Task<IEnumerable<FlightDto>> GetFlightsAsync(DateTime departureDate, string deaprtureCity, string destinationCity, CancellationToken token, DateTime? arrivalDate = null, double? minimumPrice = null, double? maximumPrice = null);
     }
 }

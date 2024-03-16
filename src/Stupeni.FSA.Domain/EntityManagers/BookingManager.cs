@@ -10,7 +10,7 @@ using Volo.Abp.Domain.Services;
 
 namespace Stupeni.FSA.EntityManagers
 {
-    public class BookingManager : DomainService
+    public class BookingManager : DomainService, IBookingManager
     {
         private readonly IRepository<Flight, int> _flightRepository;
 

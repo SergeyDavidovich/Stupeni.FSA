@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Volo.Abp.Domain.Entities;
@@ -14,7 +13,7 @@ namespace Stupeni.FSA.Entities
     {
         private Booking() { }
 
-        public Booking(Guid id, Guid userId, DateTime bookingDate) : base(id)
+        internal Booking(Guid id, Guid userId, DateTime bookingDate) : base(id)
         {
             BookingDate = bookingDate;
             UserId = userId;
