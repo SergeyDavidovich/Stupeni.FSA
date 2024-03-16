@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Stupeni.FSA.Booking.Dto
 {
@@ -10,6 +9,6 @@ namespace Stupeni.FSA.Booking.Dto
 
         public Guid UserId { get; set; }
 
-        public IEnumerable<string> FlightIds { get; set; }
+        public IEnumerable<int> FlightIds { get; set; }
     }
 }

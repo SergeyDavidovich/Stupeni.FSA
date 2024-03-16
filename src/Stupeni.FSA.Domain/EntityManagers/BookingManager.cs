@@ -19,9 +19,11 @@ namespace Stupeni.FSA.EntityManagers
             _flightRepository = flightRepository;
         }
 
-        public async Task<Booking> CreateBookingAsync(DateTime bookingDate, Guid userId, IEnumerable<Flight> bookedFlights, CancellationToken cancellationToken)
+        public async Task<Booking> CreateBookingAsync(DateTime bookingDate, Guid userId,
+            IEnumerable<Flight> bookedFlights, CancellationToken cancellationToken)
         {
             var booking = new Booking(Guid.NewGuid(), userId, bookingDate);
+
             foreach(var flight in bookedFlights)
             {
                 await ThrowIfFlightNotOperatingOnBookingDate(flight.Id, bookingDate, cancellationToken);
