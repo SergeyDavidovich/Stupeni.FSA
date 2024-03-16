@@ -19,13 +19,11 @@ namespace Stupeni.FSA.Booking.EntityManager
         [Fact]
         public async Task ShouldCreateBookingSuccessfully()
         {
-            var flight = new Flight(1);
+            var guid = Guid.NewGuid();
+            var flight = new Flight(guid);
             var bookingDate = new DateTime(2024, 3, 18); // 18.03.2024, Monday
-            var repo = Substitute.For<IRepository<Flight, int>>();
 
-            repo.FindAsync(Arg.Is<int>(1), cancellationToken: default).Returns(flight);
-
-            var manager = new BookingManager(repo);
+            var manager = new BookingManager();
 
             flight.DaysOfOperation.Add(DayOfWeek.Monday);
 
@@ -39,13 +37,11 @@ namespace Stupeni.FSA.Booking.EntityManager
         [Fact]
         public async Task ShouldThrowIfNoFlightOnBookedDate()
         {
-            var flight = new Flight(1);
+            var guid = Guid.NewGuid();
+            var flight = new Flight(guid);
             var bookingDate = new DateTime(2024, 3, 18); // 18.03.2024, Monday
-            var repo = Substitute.For<IRepository<Flight, int>>();
 
-            repo.FindAsync(Arg.Is<int>(flight.Id), cancellationToken: default).Returns(flight);
-
-            var manager = new BookingManager(repo);
+            var manager = new BookingManager();
 
             flight.DaysOfOperation.Add(DayOfWeek.Tuesday);
 

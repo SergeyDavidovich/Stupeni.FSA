@@ -14,9 +14,11 @@ namespace Stupeni.FSA.Booking.Entity
         [Fact]
         public void ShouldReturnCorrectPrice()
         {
-            var flight1 = new Flight(1);
+            var id1 = Guid.NewGuid();
+            var flight1 = new Flight(id1);
             flight1.Price = 100;
-            var flight2 = new Flight(2);
+            var id2 = Guid.NewGuid();
+            var flight2 = new Flight(id2);
             flight2.Price = 100;
 
             var userId = Guid.NewGuid();
