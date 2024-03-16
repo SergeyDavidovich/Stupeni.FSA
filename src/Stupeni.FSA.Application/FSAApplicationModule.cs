@@ -1,4 +1,7 @@
-﻿using Volo.Abp.Account;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Stupeni.FSA.DataSource;
+using Stupeni.FSA.Flights.DataSource;
+using Volo.Abp.Account;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
@@ -27,5 +30,8 @@ public class FSAApplicationModule : AbpModule
         {
             options.AddMaps<FSAApplicationModule>();
         });
+
+        context.Services.AddSingleton<ICISFlightsSource, CisFlightsDataSource>();
+        context.Services.AddSingleton<IWorldwideFlightsSource, WorldwideFlightsDataSource>();
     }
 }

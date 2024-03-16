@@ -9,7 +9,7 @@ using Volo.Abp.DependencyInjection;
 
 namespace Stupeni.FSA.DataSource
 {
-    public class CisFlightsDataSource : ICISFlightsSource, ISingletonDependency
+    public class CisFlightsDataSource : ICISFlightsSource
     {
         public async Task<IEnumerable<FlightDto>> GetFlightsAsync()
         {
