@@ -23,15 +23,15 @@ namespace Stupeni.FSA.Flights
         public async Task ShouldReturnFilteredFlights()
         {
             var departureCity = "Tashkent";
-            var destinationCity = "Prague";
-            var bookingTime = new DateTime(2024, 3, 18);
+            var destinationCity = "Almata";
+            var departureDate = new DateTime(2024, 3, 18); // Monday
 
-            var flights = await _flightApplicationService.GetFlights(bookingTime, departureCity, destinationCity);
+            var flights = await _flightApplicationService.GetFlightsAsync(departureDate, departureCity, destinationCity, default);
 
             flights.ShouldNotContain(x => 
             x.DepartureCity != departureCity && 
             x.DestinationCity != destinationCity && 
-            !x.DaysOfOperation.Contains(bookingTime.DayOfWeek));
+            !x.DaysOfOperation.Contains(departureDate.DayOfWeek));
         }
     }
 }
