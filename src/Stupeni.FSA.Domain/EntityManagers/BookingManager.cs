@@ -12,13 +12,6 @@ namespace Stupeni.FSA.EntityManagers
 {
     public class BookingManager : DomainService, IBookingManager
     {
-        private readonly IRepository<Flight, int> _flightRepository;
-
-        public BookingManager(IRepository<Flight, int> flightRepository)
-        {
-            _flightRepository = flightRepository;
-        }
-
         public async Task<Booking> CreateBookingAsync(DateTime bookingDate, Guid userId,
             IEnumerable<Flight> bookedFlights, CancellationToken cancellationToken)
         {
@@ -26,7 +19,7 @@ namespace Stupeni.FSA.EntityManagers
 
             foreach(var flight in bookedFlights)
             {
-                await ThrowIfFlightNotOperatingOnBookingDate(flight.Id, bookingDate, cancellationToken);
+                ThrowIfFlightNotOperatingOnBookingDate(flight, bookingDate, cancellationToken);
                 booking.AddFlight(flight);
             }
 
@@ -38,12 +31,8 @@ namespace Stupeni.FSA.EntityManagers
         /// </summary>
         /// <param name="flightId">Бронируемый номер рейса </param>
         /// <param name="bookingDate">Дата бронирования</param>
-        private async Task ThrowIfFlightNotOperatingOnBookingDate(int flightId, DateTime bookingDate, CancellationToken token)
+        private void ThrowIfFlightNotOperatingOnBookingDate(Flight flight, DateTime bookingDate, CancellationToken token)
         {
-            // найти рейс по flightNumber, если рейс по flightNumber, то выдать Exception
-            var flight = await _flightRepository.FindAsync(flightId, cancellationToken: token)
-                ?? throw new Exception($"Flight number {flightId} has not been found.");
-
             // проверка даты бронирования в расписании рейсов
             var matchingFlight = flight.DaysOfOperation.Contains(bookingDate.DayOfWeek);
 
