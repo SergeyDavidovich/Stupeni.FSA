@@ -26,7 +26,7 @@ namespace Stupeni.FSA.Entities
 
         public Guid UserId { get; }
 
-        public IList<int> FlightIds { get; set; } = new List<int>();
+        public IList<Guid> FlightIds { get; set; } = new List<Guid>();
 
         /// <summary>
         /// Навигационное свойство

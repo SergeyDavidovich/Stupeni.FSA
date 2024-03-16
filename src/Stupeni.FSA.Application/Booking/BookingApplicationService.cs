@@ -13,11 +13,11 @@ namespace Stupeni.FSA.Booking
     public class BookingApplicationService : ApplicationService, IBookingApplicationService
     {
         private readonly IRepository<Entities.Booking, Guid> _bookingRepository;
-        private readonly IRepository<Entities.Flight, int> _flightRepository;
+        private readonly IRepository<Entities.Flight, Guid> _flightRepository;
         private readonly IBookingManager _bookingManager;
 
         public BookingApplicationService(IRepository<Entities.Booking, Guid> bookingRepository,
-            IRepository<Entities.Flight, int> flightRepository, IBookingManager bookingManager)
+            IRepository<Entities.Flight, Guid> flightRepository, IBookingManager bookingManager)
         {
             _bookingRepository = bookingRepository;
             _flightRepository = flightRepository;
@@ -26,13 +26,28 @@ namespace Stupeni.FSA.Booking
 
         public async Task CreateBookingAsync(CreateBookingDto dto, CancellationToken token)
         {
-            var query = await _flightRepository.GetQueryableAsync();
+            var flights = new List<Entities.Flight>();
+            foreach (var flightDto in dto.Flights)
+            {
+                var flight = new Entities.Flight(Guid.NewGuid());
 
-            var flightsByFlightIds = query.Where(x => dto.FlightIds.Contains(x.Id)).ToList();
+                flight.ArrivalTime = flightDto.ArrivalTime;
+                flight.CarrierName = flightDto.CarrierName;
+                flight.DaysOfOperation = flightDto.DaysOfOperation;
+                flight.DepartureCity = flightDto.DepartureCity;
+                flight.DepartureTime = flightDto.DepartureTime;
+                flight.DestinationCity = flightDto.DestinationCity;
+                flight.FlightNumber = flightDto.FlightNumber;
+                flight.Price = flightDto.Price;
+
+                flights.Add(flight);
+
+                await _flightRepository.InsertAsync(flight);
+            }
 
             var booking = await _bookingManager.CreateBookingAsync(
                 dto.BookingDate, dto.UserId,
-                flightsByFlightIds, token);
+                flights, token);
 
             await _bookingRepository.InsertAsync(booking, cancellationToken: token);
         }
