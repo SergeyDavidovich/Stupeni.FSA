@@ -24,7 +24,7 @@ namespace Stupeni.FSA.Entities
         /// </summary>
         public DateTime BookingDate { get; private set; }
 
-        public Guid UserId { get; }
+        public Guid UserId { get; private set; }
 
         public IList<Guid> FlightIds { get; set; } = new List<Guid>();
 

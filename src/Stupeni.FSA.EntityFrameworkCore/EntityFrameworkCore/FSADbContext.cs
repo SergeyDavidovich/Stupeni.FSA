@@ -27,7 +27,7 @@ public class FSADbContext :
 {
     #region Entities from the modules
     public DbSet<Flight> Flights { get; set; }
-    public DbSet<Booking> UserInFlight { get; set; }
+    public DbSet<Booking> Bookings { get; set; }
 
     //Identity
     public DbSet<IdentityUser> Users { get; set; }
