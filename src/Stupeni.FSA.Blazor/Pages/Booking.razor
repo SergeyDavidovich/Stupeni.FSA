@@ -1,0 +1,78 @@
+﻿@page "/booking"
+@using Stupeni.FSA.Blazor.Components
+@using Stupeni.FSA.Blazor.Models
+@using Stupeni.FSA.Flights
+@using System.Threading
+@using Volo.Abp.MultiTenancy
+@using Stupeni.FSA.Flights.Dto
+@attribute [Authorize]
+@inherits FSAComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IFlightApplicationService flightApplicationService
+<MudContainer Class="d-flex flex-column align-center gap-4">
+    <RouteBuilder SearchFlightOnClicked="SearchFlightOnClicked"></RouteBuilder>
+    <MudPaper>
+        <MudGrid Class="p-3">
+            <MudItem xs="12">
+                <MudDataGrid T="FlightDto" Items="@flights" Dense ColumnResizeMode="ResizeMode.Container">
+                    <Columns>
+                        <SelectColumn />
+                        <PropertyColumn Property="x => x.FlightNumber" Title="Flight number" />
+                        <PropertyColumn Property="x => x.CarrierName" Title="Carrier name" />
+                        <PropertyColumn Property="x => x.DepartureCity" Title="Departure city" />
+                        <PropertyColumn Property="x => x.DepartureTime" />
+                        <PropertyColumn Property="x => x.DestinationCity" Title="Destination city" />
+                        <PropertyColumn Property="x => x.Price" Title="Price" />
+                    </Columns>
+                </MudDataGrid>
+            </MudItem>
+            <MudItem xs="12" Class="d-flex justify-center">
+                <MudButton FullWidth="true" Variant="@Variant.Filled">
+                    Book flights
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+    <MudGrid Style="mt-5">
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private List<FlightDto> flights = new List<FlightDto>();
+
+    private async Task SearchFlightOnClicked(BookingData data)
+    {
+        ClearFlightsListIfAny();
+
+        var cancelationToken = new CancellationToken();
+
+        // Sending new date with +1 day because of ABP problem
+        // It is known issue. Read here please - https://support.abp.io/QA/Questions/6011/Different-value-for-DateTime-Picker-and-api-request-parameter
+        var sourceFlights = await flightApplicationService.GetFlightsAsync(
+            new DateTime(data.DepartureDate!.Value.Year, data.DepartureDate!.Value.Month, data.DepartureDate!.Value.Day + 1),
+            data.DepartureCity,
+            data.DestinationCity,
+            (data.MinimalPrice ?? 0),
+            (data.MaximalPrice ?? double.MaxValue),
+            cancelationToken);
+
+        foreach (var flight in sourceFlights)
+        {
+            flights.Add(flight);
+        }
+
+        StateHasChanged();
+    }
+
+    private void ClearFlightsListIfAny()
+    {
+        if (flights.Any())
+        {
+            flights.Clear();
+        }
+    }
+}
+
+@code {
+
+}

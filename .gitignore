@@ -262,5 +262,5 @@ src/Stupeni.FSA.Blazor.Server/Logs/*
 src/Stupeni.FSA.Blazor.Server.Tiered/Logs/*
 
 # Use abp install-libs to restore.
-**/wwwroot/libs/*
+!**/wwwroot/libs/*
 !**/packages/*Theme*

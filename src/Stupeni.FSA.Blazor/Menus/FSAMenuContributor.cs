@@ -48,6 +48,13 @@ public class FSAMenuContributor : IMenuContributor
                 icon: "fas fa-home"
             )
         );
+        context.Menu.Items.Insert(
+            1,
+            new ApplicationMenuItem(
+                "Booking",
+                "Booking",
+                "/booking",
+                icon: "fas fa-edit"));
      
         var administration = context.Menu.GetAdministration();
 
