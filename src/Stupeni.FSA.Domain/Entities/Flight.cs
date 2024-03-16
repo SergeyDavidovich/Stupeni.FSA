@@ -12,7 +12,7 @@ namespace Stupeni.FSA.Entities
     {
         private Flight() { }
 
-        internal Flight(int id) : base(id) { }
+        public Flight(int id) : base(id) { }
 
         /// <summary>
         /// Номер рейса
