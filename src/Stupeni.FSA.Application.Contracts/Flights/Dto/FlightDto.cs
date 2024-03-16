@@ -28,21 +28,18 @@ namespace Stupeni.FSA.Flights.Dto
         /// <summary>
         /// Время вылета
         /// </summary>
-        public DateTime DepartureTime { get; set; }
+        public TimeSpan DepartureTime { get; set; }
 
         /// <summary>
         /// Время прилёта
         /// </summary>
-        public DateTime ArrivalTime { get; set; }
+        public TimeSpan ArrivalTime { get; set; }
 
         /// <summary>
         /// Название перевозчика. Например, Uzbekistan Airways
         /// </summary>
         public string CarrierName { get; set; }
 
-        /// <summary>
-        /// Количество пересадок
-        /// </summary>
-        public int CountTransfers { get; set; }
+        public double Price { get; set; }
     }
 }
