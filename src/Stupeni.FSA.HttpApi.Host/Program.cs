@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http.Timeouts;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -32,9 +34,11 @@ public class Program
             builder.Host.AddAppSettingsSecretsJson()
                 .UseAutofac()
                 .UseSerilog();
+
             await builder.AddApplicationAsync<FSAHttpApiHostModule>();
             var app = builder.Build();
             await app.InitializeApplicationAsync();
+
             await app.RunAsync();
             return 0;
         }

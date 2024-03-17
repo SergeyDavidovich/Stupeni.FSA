@@ -29,6 +29,9 @@ using Volo.Abp.Security.Claims;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
+using Microsoft.AspNetCore.Http.Timeouts;
+using System.Net;
+using Microsoft.AspNetCore.Http;
 
 namespace Stupeni.FSA;
 
@@ -70,6 +73,7 @@ public class FSAHttpApiHostModule : AbpModule
         ConfigureVirtualFileSystem(context);
         ConfigureCors(context, configuration);
         ConfigureSwaggerServices(context, configuration);
+        ConfigureTimeoutRequests(context);
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
@@ -175,6 +179,17 @@ public class FSAHttpApiHostModule : AbpModule
         });
     }
 
+    private void ConfigureTimeoutRequests(ServiceConfigurationContext context)
+    {
+        context.Services.AddRequestTimeouts(options =>
+            {
+                options.DefaultPolicy = new RequestTimeoutPolicy
+                {
+                    Timeout = TimeSpan.FromMilliseconds(10000)
+                };
+            });
+    }
+
     public override void OnApplicationInitialization(ApplicationInitializationContext context)
     {
         var app = context.GetApplicationBuilder();
@@ -195,6 +210,7 @@ public class FSAHttpApiHostModule : AbpModule
         app.UseCorrelationId();
         app.UseStaticFiles();
         app.UseRouting();
+        app.UseRequestTimeouts();
         app.UseCors();
         app.UseAuthentication();
         app.UseAbpOpenIddictValidation();
