@@ -2,7 +2,7 @@
 <MudPaper>
     <MudGrid Class="p-3">
         <MudItem xs="12">
-            <MudDataGrid T="FlightDto" Items="@Flights" Dense ColumnResizeMode="ResizeMode.Container" @bind-SelectedItems="@selectedFlights">
+            <MudDataGrid T="FlightDto" Items="@Flights" Dense ColumnResizeMode="ResizeMode.Container" @bind-SelectedItem="@selectedFlight">
                 <Columns>
                     <SelectColumn />
                     <PropertyColumn Property="x => x.FlightNumber" Title="Flight number" />
@@ -27,12 +27,12 @@
     public List<FlightDto> Flights{ get; set; }
 
     [Parameter]
-    public EventCallback<IEnumerable<FlightDto>> BookButtonOnClicked{ get; set; }
+    public EventCallback<FlightDto> BookButtonOnClicked{ get; set; }
 
-    private HashSet<FlightDto> selectedFlights = new HashSet<FlightDto>();
+    private FlightDto selectedFlight;
 
     private async Task BookFlightClicked()
     {
-        await BookButtonOnClicked.InvokeAsync(selectedFlights.ToList());
+        await BookButtonOnClicked.InvokeAsync(selectedFlight);
     }
 }

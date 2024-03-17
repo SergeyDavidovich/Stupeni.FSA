@@ -12,7 +12,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Stupeni.FSA.Migrations
 {
     [DbContext(typeof(FSADbContext))]
-    [Migration("20240316204348_AddUserIdToBooking")]
+    [Migration("20240317104837_AddUserIdToBooking")]
     partial class AddUserIdToBooking
     {
         /// <inheritdoc />
@@ -31,14 +31,16 @@ namespace Stupeni.FSA.Migrations
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("FlightIds")
-                        .IsRequired()
+                    b.Property<Guid>("FlightId")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FlightId")
+                        .IsUnique();
 
                     b.ToTable("Bookings");
                 });
@@ -49,9 +51,6 @@ namespace Stupeni.FSA.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<TimeSpan>("ArrivalTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("BookingId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CarrierName")
@@ -81,8 +80,6 @@ namespace Stupeni.FSA.Migrations
                         .HasColumnType("REAL");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookingId");
 
                     b.ToTable("Flights");
                 });
@@ -1821,15 +1818,15 @@ namespace Stupeni.FSA.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
-            modelBuilder.Entity("Stupeni.FSA.Entities.Flight", b =>
+            modelBuilder.Entity("Stupeni.FSA.Entities.Booking", b =>
                 {
-                    b.HasOne("Stupeni.FSA.Entities.Booking", "Booking")
-                        .WithMany("Flights")
-                        .HasForeignKey("BookingId")
+                    b.HasOne("Stupeni.FSA.Entities.Flight", "Flight")
+                        .WithOne("Booking")
+                        .HasForeignKey("Stupeni.FSA.Entities.Booking", "FlightId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Booking");
+                    b.Navigation("Flight");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>
@@ -1974,9 +1971,9 @@ namespace Stupeni.FSA.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Stupeni.FSA.Entities.Booking", b =>
+            modelBuilder.Entity("Stupeni.FSA.Entities.Flight", b =>
                 {
-                    b.Navigation("Flights");
+                    b.Navigation("Booking");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>

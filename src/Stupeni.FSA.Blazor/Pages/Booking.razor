@@ -58,14 +58,14 @@
         }
     }
 
-    private async Task BookFlightsAsync(IEnumerable<FlightDto> flights)
+    private async Task BookFlightsAsync(FlightDto flight)
     {
         var cancellationToken = new CancellationToken();
         await bookingApplicationService.CreateBookingAsync(new CreateBookingDto()
         {
             UserId = currentUser.Id!.Value,
             BookingDate = routeBuilder.DepartureTime!.Value,
-            Flights = flights
+            Flight = flight
         }, cancellationToken);
         await notificationService.Success("Booking created", "Success");
     }
