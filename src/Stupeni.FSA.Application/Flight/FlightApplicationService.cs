@@ -36,7 +36,13 @@ namespace Stupeni.FSA.Flight
                     AbsoluteExpiration = DateTimeOffset.Now.AddHours(1)
                 }, null, false, token);
 
-            var worldwideFlights = await _worldwideFlightsSource.GetFlightsAsync(token);
+            var worldwideFlights = await _flightCache.GetOrAddAsync(
+                "worldwideFlights",
+                async () => await _worldwideFlightsSource.GetFlightsAsync(token),
+                () => new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpiration = DateTimeOffset.Now.AddHours(1)
+                }, null, false, token);
 
             var filteredCisFlights = GetFilteredList(cisFlights, departureDate, deaprtureCity, destinationCity, minimumPrice, maximumPrice);
             var filteredWorldWideFlights = GetFilteredList(worldwideFlights, departureDate, deaprtureCity, destinationCity, minimumPrice, maximumPrice);
