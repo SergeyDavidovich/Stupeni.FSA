@@ -6,6 +6,7 @@
 @using Stupeni.FSA.Flights
 @using System.Threading
 @using Volo.Abp.AspNetCore.Components.Notifications
+@using Volo.Abp.AspNetCore.Components.Messages
 @using Volo.Abp.MultiTenancy
 @using Stupeni.FSA.Flights.Dto
 @using Volo.Abp.Users
@@ -16,6 +17,7 @@
 @inject IFlightApplicationService flightApplicationService
 @inject IBookingApplicationService bookingApplicationService
 @inject IUiNotificationService notificationService
+@inject IUiMessageService messageService
 
 <MudContainer Class="d-flex flex-column align-center gap-4">
     <RouteBuilder @ref="routeBuilder" SearchFlightOnClicked="SearchFlightOnClicked"></RouteBuilder>
@@ -47,6 +49,12 @@
             flights.Add(flight);
         }
 
+        if (!flights.Any())
+        {
+            await messageService.Info("No matching flights");
+        }
+
+
         StateHasChanged();
     }
 
@@ -62,11 +70,11 @@
     {
         var cancellationToken = new CancellationToken();
         await bookingApplicationService.CreateBookingAsync(new CreateBookingDto()
-        {
-            UserId = currentUser.Id!.Value,
-            BookingDate = routeBuilder.DepartureTime!.Value,
-            Flight = flight
-        }, cancellationToken);
+            {
+                UserId = currentUser.Id!.Value,
+                BookingDate = routeBuilder.DepartureTime!.Value,
+                Flight = flight
+            }, cancellationToken);
         await notificationService.Success("Booking created", "Success");
     }
 }
