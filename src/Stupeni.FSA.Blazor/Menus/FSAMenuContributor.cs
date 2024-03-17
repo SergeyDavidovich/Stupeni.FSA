@@ -52,14 +52,14 @@ public class FSAMenuContributor : IMenuContributor
             1,
             new ApplicationMenuItem(
                 "Booking",
-                "Booking",
+                l["Booking"],
                 "/booking",
                 icon: "fas fa-edit"));
         context.Menu.Items.Insert(
             2,
             new ApplicationMenuItem(
                 "Bookings",
-                "Bookings",
+                l["Bookings"],
                 "/bookings",
                 icon: "fas fa-list"));
      

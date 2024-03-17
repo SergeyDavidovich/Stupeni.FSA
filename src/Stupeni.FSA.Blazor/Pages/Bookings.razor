@@ -1,32 +1,35 @@
 ﻿@page "/bookings"
+@using Microsoft.Extensions.Localization
 @using Stupeni.FSA.Booking
 @using System.Threading
 @using Stupeni.FSA.Booking.Dto
+@using Stupeni.FSA.Localization
 @using Volo.Abp.Users
 @attribute [Authorize]
 @inherits FSAComponentBase
 @inject ICurrentUser currentUser
 @inject IBookingApplicationService bookingApplicationService
+@inject IStringLocalizer<FSAResource> localizer
 
 <MudDataGrid Items="bookings" ReadOnly="true">
     <Columns>
-        <PropertyColumn Property="x=>x.BookingId" Title="Booking id"/>
-        <PropertyColumn Property="x=>x.BookingDate" Title="Departure date" />
+        <PropertyColumn Property="x=>x.BookingId" Title="@localizer["BookingId"]"/>
+        <PropertyColumn Property="x=>x.BookingDate" Title="@localizer["DepartureDate"]" />
     </Columns>
     <ChildRowContent>
         <MudCard>
             <MudCardHeader>
                 <CardHeaderContent>
-                    <MudText Typo="Typo.h6">Flight info</MudText>
+                    <MudText Typo="Typo.h6">@localizer["FlightInfo"]</MudText>
                 </CardHeaderContent>
             </MudCardHeader>
             <MudCardContent>
-                <MudText>Flight number: @context.Item.Flight.FlightNumber</MudText>
-                <MudText>Departure city: @context.Item.Flight.DepartureCity</MudText>
-                <MudText>Destination city: @context.Item.Flight.DestinationCity</MudText>
-                <MudText>Departure time: @context.Item.Flight.DepartureTime</MudText>
-                <MudText>Arrival time: @context.Item.Flight.ArrivalTime</MudText>
-                <MudText>Carrier: @context.Item.Flight.CarrierName</MudText>
+                <MudText>@localizer["FlightNumber"]: @context.Item.Flight.FlightNumber</MudText>
+                <MudText>@localizer["DepartureCity"]: @context.Item.Flight.DepartureCity</MudText>
+                <MudText>@localizer["DestinationCity"]: @context.Item.Flight.DestinationCity</MudText>
+                <MudText>@localizer["DepartureTime"]: @context.Item.Flight.DepartureTime</MudText>
+                <MudText>@localizer["ArrivalTime"]: @context.Item.Flight.ArrivalTime</MudText>
+                <MudText>@localizer["CarrierName"]: @context.Item.Flight.CarrierName</MudText>
             </MudCardContent>
         </MudCard>
     </ChildRowContent>

@@ -3,6 +3,25 @@
   "texts": {
     "Menu:Home": "Home",
     "Welcome": "Welcome",
-    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io."
+    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
+    "Booking": "Booking",
+    "Bookings": "Bookings",
+    "NoMatchingFlight": "No matching flight",
+    "LivingFrom": "From",
+    "GoingTo": "To",
+    "DepartureDate": "Date",
+    "MinimalPrice": "Minimal price",
+    "MaximalPrice": "Maximal price",
+    "SearchFlightButtonText": "Find flights",
+    "FlightNumber": "Flight number",
+    "CarrierName": "Carrier",
+    "DepartureCity": "From",
+    "DepartureTime": "Departure time",
+    "DestinationCity": "To",
+    "Price": "Price",
+    "BookFlightButtonText": "Book flight",
+    "BookingId": "Booking number",
+    "ArrivalTime": "Arrival time",
+    "FlightInfo": "Flight info"
   }
 }

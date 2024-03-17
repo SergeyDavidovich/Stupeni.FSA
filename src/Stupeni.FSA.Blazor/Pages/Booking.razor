@@ -1,10 +1,12 @@
 ﻿@page "/booking"
+@using Microsoft.Extensions.Localization
 @using Stupeni.FSA.Blazor.Components
 @using Stupeni.FSA.Blazor.Models
 @using Stupeni.FSA.Booking
 @using Stupeni.FSA.Booking.Dto
 @using Stupeni.FSA.Flights
 @using System.Threading
+@using Stupeni.FSA.Localization
 @using Volo.Abp.AspNetCore.Components.Notifications
 @using Volo.Abp.AspNetCore.Components.Messages
 @using Volo.Abp.MultiTenancy
@@ -18,6 +20,7 @@
 @inject IBookingApplicationService bookingApplicationService
 @inject IUiNotificationService notificationService
 @inject IUiMessageService messageService
+@inject IStringLocalizer<FSAResource> localizer
 
 <MudContainer Class="d-flex flex-column align-center gap-4">
     <RouteBuilder @ref="routeBuilder" SearchFlightOnClicked="SearchFlightOnClicked"></RouteBuilder>
@@ -51,7 +54,7 @@
 
         if (!flights.Any())
         {
-            await messageService.Info("No matching flights");
+            await messageService.Info(localizer["NoMatchingFlight"]);
         }
 
 

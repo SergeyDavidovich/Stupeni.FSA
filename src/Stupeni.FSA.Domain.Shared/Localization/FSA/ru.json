@@ -3,6 +3,25 @@
   "texts": {
     "Menu:Home": "Главная",
     "Welcome": "Добро пожаловать",
-    "LongWelcomeMessage": "Добро пожаловать в приложение. Этот запущенный проект основан на фреймворке ABP. Для получения дополнительной информации посетите сайт abp.io."
+    "LongWelcomeMessage": "Добро пожаловать в приложение. Этот запущенный проект основан на фреймворке ABP. Для получения дополнительной информации посетите сайт abp.io.",
+    "Booking": "Забронировать",
+    "Bookings": "Ваши броинрования",
+    "NoMatchingFlight": "Нету подходящих полётов",
+    "LivingFrom": "Из",
+    "GoingTo": "В",
+    "DepartureDate": "Дата",
+    "MinimalPrice": "Минимальная цена",
+    "MaximalPrice": "Максимальная цена",
+    "SearchFlightButtonText": "Найти рейсы",
+    "FlightNumber": "Номер рейса",
+    "CarrierName": "Компания перевозчик",
+    "DepartureCity": "Из",
+    "DepartureTime": "Время рейса",
+    "DestinationCity": "В",
+    "Price": "Цена",
+    "BookFlightButtonText": "Забронировать",
+    "BookingId": "Номер бронирования",
+    "ArrivalTime": "Время прибытия",
+    "FlightInfo": "Информация о полёте"
   }
 }

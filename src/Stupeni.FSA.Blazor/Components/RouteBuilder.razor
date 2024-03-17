@@ -1,8 +1,12 @@
-﻿@using Stupeni.FSA.Blazor.Models
+﻿@using Microsoft.Extensions.Localization
+@using Stupeni.FSA.Blazor.Models
+@using Stupeni.FSA.Localization
+@inject IStringLocalizer<FSAResource> localizer
+
 <MudPaper Width="50%">
     <MudGrid Class="p-3">
         <MudItem xs="12">
-            <MudSelect T="string" Variant="Variant.Outlined" Label="Living from" AnchorOrigin="Origin.BottomCenter" @bind-Value="departureCity">
+            <MudSelect T="string" Variant="Variant.Outlined" Label="@localizer["DepartureCity"]" AnchorOrigin="Origin.BottomCenter" @bind-Value="departureCity">
                 <MudSelectItem Value="@("Tashkent")" />
                 <MudSelectItem Value="@("Moscow")" />
                 <MudSelectItem Value="@("Astana")" />
@@ -13,7 +17,7 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="12">
-            <MudSelect T="string" Label="Going to" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="destinationCity">
+            <MudSelect T="string" Label="@localizer["DestinationCity"]" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="destinationCity">
                 <MudSelectItem Value="@("Tashkent")" />
                 <MudSelectItem Value="@("Moscow")" />
                 <MudSelectItem Value="@("Astana")" />
@@ -24,17 +28,17 @@
             </MudSelect>
         </MudItem>
         <MudItem xs="12">
-            <MudDatePicker Label="Depart" DisableToolbar="true" Variant="Variant.Outlined" @bind-Date="@departureDate"/>
+            <MudDatePicker Label="@localizer["DepartureDate"]" DisableToolbar="true" Variant="Variant.Outlined" @bind-Date="@departureDate"/>
         </MudItem>
         <MudItem xs="12" lg="6" md="6">
-            <MudNumericField HideSpinButtons="true" Label="Minimal price" Variant="Variant.Outlined" @bind-Value="@minimalPrice"/>
+            <MudNumericField HideSpinButtons="true" Label="@localizer["MinimalPrice"]" Variant="Variant.Outlined" @bind-Value="@minimalPrice"/>
         </MudItem>
         <MudItem xs="12" lg="6" md="6">
-            <MudNumericField HideSpinButtons="true" Label="Maximal price" Variant="Variant.Outlined" @bind-Value="@maximalPrice"/>
+            <MudNumericField HideSpinButtons="true" Label="@localizer["MaximalPrice"]" Variant="Variant.Outlined" @bind-Value="@maximalPrice"/>
         </MudItem>
         <MudItem xs="12">
             <MudButton Variant="Variant.Filled" FullWidth="true" OnClick="SearchFlightClicked">
-                Search flight
+                @localizer["SearchFlightButtonText"]
             </MudButton>
         </MudItem>
     </MudGrid>

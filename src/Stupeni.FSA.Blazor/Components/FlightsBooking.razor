@@ -1,22 +1,26 @@
-﻿@using Stupeni.FSA.Flights.Dto
+﻿@using Microsoft.Extensions.Localization
+@using Stupeni.FSA.Flights.Dto
+@using Stupeni.FSA.Localization
+@inject IStringLocalizer<FSAResource> localizer
+
 <MudPaper>
     <MudGrid Class="p-3">
         <MudItem xs="12">
             <MudDataGrid T="FlightDto" Items="@Flights" Dense ColumnResizeMode="ResizeMode.Container" @bind-SelectedItem="@selectedFlight">
                 <Columns>
                     <SelectColumn />
-                    <PropertyColumn Property="x => x.FlightNumber" Title="Flight number" />
-                    <PropertyColumn Property="x => x.CarrierName" Title="Carrier name" />
-                    <PropertyColumn Property="x => x.DepartureCity" Title="Departure city" />
-                    <PropertyColumn Property="x => x.DepartureTime" />
-                    <PropertyColumn Property="x => x.DestinationCity" Title="Destination city" />
-                    <PropertyColumn Property="x => x.Price" Title="Price" />
+                    <PropertyColumn Property="x => x.FlightNumber" Title="@localizer["FlightNumber"]" />
+                    <PropertyColumn Property="x => x.CarrierName" Title="@localizer["CarrierName"]" />
+                    <PropertyColumn Property="x => x.DepartureCity" Title="@localizer["DepartureCity"]" />
+                    <PropertyColumn Property="x => x.DepartureTime" Title="@localizer["DepartureTime"]"/>
+                    <PropertyColumn Property="x => x.DestinationCity" Title="@localizer["DestinationCity"]" />
+                    <PropertyColumn Property="x => x.Price" Title="@localizer["Price"]" />
                 </Columns>
             </MudDataGrid>
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-center">
             <MudButton FullWidth="true" Variant="@Variant.Filled" OnClick="BookFlightClicked">
-                Book flights
+                @localizer["BookFlightButtonText"]
             </MudButton>
         </MudItem>
     </MudGrid>

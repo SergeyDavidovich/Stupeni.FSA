@@ -19,6 +19,8 @@ using Volo.Abp.Security.Claims;
 using Volo.Abp.SettingManagement.Blazor.WebAssembly;
 using Volo.Abp.TenantManagement.Blazor.WebAssembly;
 using Volo.Abp.Timing;
+using Volo.Abp.Localization;
+using Volo.Abp.VirtualFileSystem;
 
 namespace Stupeni.FSA.Blazor;
 
@@ -28,7 +30,8 @@ namespace Stupeni.FSA.Blazor;
     typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeModule),
     typeof(AbpIdentityBlazorWebAssemblyModule),
     typeof(AbpTenantManagementBlazorWebAssemblyModule),
-    typeof(AbpSettingManagementBlazorWebAssemblyModule)
+    typeof(AbpSettingManagementBlazorWebAssemblyModule),
+    typeof(AbpLocalizationModule)
 )]
 public class FSABlazorModule : AbpModule
 {
