@@ -10,6 +10,6 @@ namespace Stupeni.FSA.Booking.Dto
 
         public Guid UserId { get; set; }
 
-        public IEnumerable<FlightDto> Flights { get; set; }
+        public FlightDto Flight { get; set; }
     }
 }

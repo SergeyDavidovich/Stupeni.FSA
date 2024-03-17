@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
-using Volo.Abp.Domain.Repositories;
 
 namespace Stupeni.FSA.Flight
 {
@@ -24,22 +23,21 @@ namespace Stupeni.FSA.Flight
 
         public async Task<IEnumerable<FlightDto>> GetFlightsAsync(DateTime departureDate, string deaprtureCity, string destinationCity, double minimumPrice, double maximumPrice, CancellationToken token)
         {
-            var cisFlights = await _cisFlightsSource.GetFlightsAsync();
-            var worldwideFlights = await _worldwideFlightsSource.GetFlightsAsync();
+            var cisFlights = await _cisFlightsSource.GetFlightsAsync(token);
+            var worldwideFlights = await _worldwideFlightsSource.GetFlightsAsync(token);
 
-            var filteredCisFlights = GetFilteredList(cisFlights, departureDate, deaprtureCity, destinationCity, token, minimumPrice, maximumPrice);
-            var filteredWorldWideFlights = GetFilteredList(worldwideFlights, departureDate, deaprtureCity, destinationCity, token, minimumPrice, maximumPrice);
+            var filteredCisFlights = GetFilteredList(cisFlights, departureDate, deaprtureCity, destinationCity, minimumPrice, maximumPrice);
+            var filteredWorldWideFlights = GetFilteredList(worldwideFlights, departureDate, deaprtureCity, destinationCity, minimumPrice, maximumPrice);
 
             return filteredCisFlights.Concat(filteredWorldWideFlights);
         }
 
         private IEnumerable<FlightDto> GetFilteredList(
-            IEnumerable<FlightDto> flights, 
-            DateTime departureDate, 
-            string deaprtureCity, 
-            string destinationCity, 
-            CancellationToken token,
-            double? minimumPrice = null, 
+            IEnumerable<FlightDto> flights,
+            DateTime departureDate,
+            string deaprtureCity,
+            string destinationCity,
+            double? minimumPrice = null,
             double? maximumPrice = null)
         {
             var dayOfDeparture = departureDate.DayOfWeek;

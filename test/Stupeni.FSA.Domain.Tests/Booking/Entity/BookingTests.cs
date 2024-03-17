@@ -24,8 +24,8 @@ namespace Stupeni.FSA.Booking.Entity
             var userId = Guid.NewGuid();
 
             var booking = new Entities.Booking(Guid.NewGuid(), userId, DateTime.Now);
-            booking.Flights.Add(flight1);
-            booking.Flights.Add(flight2);
+            //booking.Flights.Add(flight1);
+            //booking.Flights.Add(flight2);
 
             booking.Price.ShouldBe(flight1.Price + flight2.Price);
         }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stupeni.FSA.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -11,9 +12,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Stupeni.FSA.Migrations
 {
     [DbContext(typeof(FSADbContext))]
-    partial class FSADbContextModelSnapshot : ModelSnapshot
+    [Migration("20240317105157_AddBookingAndFlight")]
+    partial class AddBookingAndFlight
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,70 +77,6 @@ namespace Stupeni.FSA.Migrations
                         .HasColumnType("REAL");
 
                     b.HasKey("Id");
-
-                    b.ToTable("Flights");
-                });
-
-            modelBuilder.Entity("Stupeni.FSA.Entities.Booking", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("BookingDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("FlightIds")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Bookings");
-                });
-
-            modelBuilder.Entity("Stupeni.FSA.Entities.Flight", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<TimeSpan>("ArrivalTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("BookingId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CarrierName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("DaysOfOperation")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("DepartureCity")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<TimeSpan>("DepartureTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("DestinationCity")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("FlightNumber")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("REAL");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookingId");
 
                     b.ToTable("Flights");
                 });

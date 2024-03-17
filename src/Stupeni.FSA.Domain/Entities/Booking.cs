@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Volo.Abp.Domain.Entities;
 
 namespace Stupeni.FSA.Entities
@@ -26,25 +24,25 @@ namespace Stupeni.FSA.Entities
 
         public Guid UserId { get; private set; }
 
-        public IList<Guid> FlightIds { get; set; } = new List<Guid>();
+        public Guid FlightId { get; set; }
 
         /// <summary>
         /// Навигационное свойство
         /// </summary>
-        public IList<Flight> Flights { get; internal set; } = new List<Flight>();
+        public Flight Flight { get; internal set; }
 
         public double Price
         {
             get
             {
-                return Flights.Sum(x => x.Price);
+                return Flight.Price;
             }
         }
 
         public void AddFlight(Flight flight)
         {
-            Flights.Add(flight);
-            FlightIds.Add(flight.Id);
+            Flight = flight;
+            FlightId = flight.Id;
         }
     }
 }
