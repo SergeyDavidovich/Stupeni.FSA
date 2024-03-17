@@ -1,6 +1,51 @@
 ﻿@page "/bookings"
-<h3>Bookings</h3>
+@using Stupeni.FSA.Booking
+@using System.Threading
+@using Stupeni.FSA.Booking.Dto
+@using Volo.Abp.Users
+@attribute [Authorize]
+@inherits FSAComponentBase
+@inject ICurrentUser currentUser
+@inject IBookingApplicationService bookingApplicationService
+
+<MudDataGrid Items="bookings" ReadOnly="true">
+    <Columns>
+        <PropertyColumn Property="x=>x.BookingDate" Title="Departure date" />
+        <PropertyColumn Property="x=>x.Price" Title="Price" />
+    </Columns>
+    <ChildRowContent>
+        <MudCard>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6">Flight(s) info</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudText>Flight number: @context.Item.Flights.Single().FlightNumber</MudText>
+                <MudText>Departure city: @context.Item.Flights.Single().DepartureCity</MudText>
+                <MudText>Destination city: @context.Item.Flights.Single().DestinationCity</MudText>
+                <MudText>Departure time: @context.Item.Flights.Single().DepartureTime</MudText>
+                <MudText>Arrival time: @context.Item.Flights.Single().ArrivalTime</MudText>
+                <MudText>Carrier: @context.Item.Flights.Single().CarrierName</MudText>
+            </MudCardContent>
+        </MudCard>
+    </ChildRowContent>
+</MudDataGrid>
 
 @code {
+    private List<BookingDto> bookings = new List<BookingDto>();
 
+    protected override async Task OnInitializedAsync()
+    {
+        var cancellationTokent = new CancellationToken();
+
+        var bookings = await bookingApplicationService.GetBookingsByUserIdAsync(currentUser.Id!.Value, cancellationTokent);
+
+        foreach (var booking in bookings.ToList())
+        {
+            bookings.Add(booking);
+        }
+
+        StateHasChanged();
+    }
 }

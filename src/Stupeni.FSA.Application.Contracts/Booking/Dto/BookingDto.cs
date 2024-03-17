@@ -13,7 +13,7 @@ namespace Stupeni.FSA.Booking.Dto
 
         public Guid UserId { get; }
 
-        public ICollection<FlightDto> Flights { get; set; }
+        public List<FlightDto> Flights { get; set; }
         
         public double Price { get; set; }
     }
