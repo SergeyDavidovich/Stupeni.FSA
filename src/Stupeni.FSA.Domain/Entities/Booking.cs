@@ -24,20 +24,12 @@ namespace Stupeni.FSA.Entities
 
         public Guid UserId { get; private set; }
 
-        public Guid FlightId { get; set; }
+        public Guid FlightId { get; internal set; }
 
         /// <summary>
         /// Навигационное свойство
         /// </summary>
-        public Flight Flight { get; internal set; }
-
-        public double Price
-        {
-            get
-            {
-                return Flight.Price;
-            }
-        }
+        public Flight Flight { get; set; }
 
         public void AddFlight(Flight flight)
         {

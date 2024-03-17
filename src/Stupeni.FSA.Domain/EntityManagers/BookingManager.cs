@@ -9,8 +9,7 @@ namespace Stupeni.FSA.EntityManagers
 {
     public class BookingManager : DomainService, IBookingManager
     {
-        public async Task<Booking> CreateBookingAsync(DateTime bookingDate, Guid userId,
-            Flight bookedFlight)
+        public async Task<Booking> CreateBookingAsync(DateTime bookingDate, Guid userId, Flight bookedFlight)
         {
             var booking = new Booking(Guid.NewGuid(), userId, bookingDate);
 

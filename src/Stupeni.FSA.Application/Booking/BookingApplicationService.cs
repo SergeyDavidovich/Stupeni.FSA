@@ -65,6 +65,12 @@ namespace Stupeni.FSA.Booking
 
             var bookings = query.Where(x => x.UserId == userId).ToList();
 
+            foreach (var  booking in bookings)
+            {
+                var childFlight = await _flightRepository.SingleAsync(x => x.Id == booking.FlightId);
+                booking.Flight = childFlight;
+            }
+
             return ObjectMapper.Map<List<Entities.Booking>, List<BookingDto>>(bookings);
         }
     }
