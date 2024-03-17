@@ -9,6 +9,12 @@ namespace Stupeni.FSA.Flights
 {
     public interface IFlightApplicationService : IApplicationService
     {
-        Task<IEnumerable<FlightDto>> GetFlightsAsync(DateTime departureDate, string deaprtureCity, string destinationCity, CancellationToken token, DateTime? arrivalDate = null, double? minimumPrice = null, double? maximumPrice = null);
+        Task<IEnumerable<FlightDto>> GetFlightsAsync(
+            DateTime departureDate, 
+            string deaprtureCity, 
+            string destinationCity, 
+            double minimumPrice, 
+            double maximumPrice,
+            CancellationToken token);
     }
 }

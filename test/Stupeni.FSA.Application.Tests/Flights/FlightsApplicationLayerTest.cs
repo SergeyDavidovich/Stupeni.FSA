@@ -26,7 +26,7 @@ namespace Stupeni.FSA.Flights
             var destinationCity = "Almata";
             var departureDate = new DateTime(2024, 3, 18); // Monday
 
-            var flights = await _flightApplicationService.GetFlightsAsync(departureDate, departureCity, destinationCity, default);
+            var flights = await _flightApplicationService.GetFlightsAsync(departureDate, departureCity, destinationCity, 0, 1000, default);
 
             flights.ShouldNotContain(x => 
             x.DepartureCity != departureCity && 

@@ -1,33 +1,39 @@
-﻿<MudPaper Width="50%">
+﻿@using Stupeni.FSA.Blazor.Models
+<MudPaper Width="50%">
     <MudGrid Class="p-3">
         <MudItem xs="12">
-            <MudSelect T="string" Variant="Variant.Outlined" Label="Living from" AnchorOrigin="Origin.BottomCenter">
+            <MudSelect T="string" Variant="Variant.Outlined" Label="Living from" AnchorOrigin="Origin.BottomCenter" @bind-Value="departureCity">
                 <MudSelectItem Value="@("Tashkent")" />
                 <MudSelectItem Value="@("Moscow")" />
                 <MudSelectItem Value="@("Astana")" />
                 <MudSelectItem Value="@("Prague")" />
                 <MudSelectItem Value="@("Berlin")" />
                 <MudSelectItem Value="@("Samarkand")" />
+                <MudSelectItem Value="@("Almata")"/>
             </MudSelect>
         </MudItem>
         <MudItem xs="12">
-            <MudSelect T="string" Label="Going to" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+            <MudSelect T="string" Label="Going to" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="destinationCity">
                 <MudSelectItem Value="@("Tashkent")" />
                 <MudSelectItem Value="@("Moscow")" />
                 <MudSelectItem Value="@("Astana")" />
                 <MudSelectItem Value="@("Prague")" />
                 <MudSelectItem Value="@("Berlin")" />
                 <MudSelectItem Value="@("Samarkand")" />
+                <MudSelectItem Value="@("Almata")"/>
             </MudSelect>
         </MudItem>
-        <MudItem xs="12" lg="6" md="6">
-            <MudDatePicker Label="Depart" DisableToolbar="true" Variant="Variant.Outlined" />
+        <MudItem xs="12">
+            <MudDatePicker Label="Depart" DisableToolbar="true" Variant="Variant.Outlined" @bind-Date="@departureDate"/>
         </MudItem>
         <MudItem xs="12" lg="6" md="6">
-            <MudDatePicker Label="Return" DisableToolbar="true" Variant="Variant.Outlined" />
+            <MudNumericField HideSpinButtons="true" Label="Minimal price" Variant="Variant.Outlined" @bind-Value="@minimalPrice"/>
+        </MudItem>
+        <MudItem xs="12" lg="6" md="6">
+            <MudNumericField HideSpinButtons="true" Label="Maximal price" Variant="Variant.Outlined" @bind-Value="@maximalPrice"/>
         </MudItem>
         <MudItem xs="12">
-            <MudButton Variant="Variant.Filled" FullWidth="true">
+            <MudButton Variant="Variant.Filled" FullWidth="true" OnClick="SearchFlightClicked">
                 Search flight
             </MudButton>
         </MudItem>
@@ -35,5 +41,24 @@
 </MudPaper>
 
 @code {
+    private string departureCity;
+    private string destinationCity;
+    private DateTime? departureDate;
+    private double? minimalPrice;
+    private double? maximalPrice;
 
+    private async Task SearchFlightClicked()
+    {
+        BookingData bookingData = new BookingData();
+        bookingData.DepartureCity = departureCity;
+        bookingData.DestinationCity = destinationCity;
+        bookingData.DepartureDate = departureDate;
+        bookingData.MinimalPrice = minimalPrice;
+        bookingData.MaximalPrice = maximalPrice;
+
+        await SearchFlightOnClicked.InvokeAsync(bookingData);
+    }
+
+    [Parameter]
+    public EventCallback<BookingData> SearchFlightOnClicked { get; set; }
 }

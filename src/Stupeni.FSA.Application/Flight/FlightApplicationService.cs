@@ -21,7 +21,7 @@ namespace Stupeni.FSA.Flight
             _worldwideFlightsSource = worldwideFlightsSource;
         }
 
-        public async Task<IEnumerable<FlightDto>> GetFlightsAsync(DateTime departureDate, string deaprtureCity, string destinationCity, CancellationToken token, DateTime? arrivalDate = null, double? minimumPrice = null, double? maximumPrice = null)
+        public async Task<IEnumerable<FlightDto>> GetFlightsAsync(DateTime departureDate, string deaprtureCity, string destinationCity, double minimumPrice, double maximumPrice, CancellationToken token)
         {
             var cisFlights = await _cisFlightsSource.GetFlightsAsync(token);
             var worldwideFlights = await _worldwideFlightsSource.GetFlightsAsync(token);
@@ -42,12 +42,10 @@ namespace Stupeni.FSA.Flight
         {
             var dayOfDeparture = departureDate.DayOfWeek;
 
-            var filteredList = flights.Where(x =>
-            x.DepartureCity == deaprtureCity && x.DestinationCity == destinationCity &&
-            x.DaysOfOperation.Contains(dayOfDeparture));
-
-            if (minimumPrice.HasValue && maximumPrice.HasValue)
-                filteredList = filteredList.Where(x => x.Price > minimumPrice && x.Price < maximumPrice);
+            var filteredList = flights
+                .Where(x => x.DepartureCity == deaprtureCity && x.DestinationCity == destinationCity)
+                .Where(x => x.DaysOfOperation.Contains(dayOfDeparture))
+                .Where(x => x.Price > (minimumPrice ?? 0) && x.Price < (maximumPrice ?? double.MaxValue));
 
             return filteredList;
         }
