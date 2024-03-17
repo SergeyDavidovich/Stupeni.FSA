@@ -8,6 +8,7 @@ using Volo.Abp.Domain.Repositories;
 using Stupeni.FSA.EntityManagers.Interfaces;
 using System.Linq;
 using Volo.Abp.Caching;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Stupeni.FSA.Booking
 {
@@ -16,32 +17,29 @@ namespace Stupeni.FSA.Booking
         private readonly IRepository<Entities.Booking, Guid> _bookingRepository;
         private readonly IRepository<Entities.Flight, Guid> _flightRepository;
         private readonly IBookingManager _bookingManager;
-        private readonly IDistributedCache<List<Entities.Flight>> _flightCache;
-        private readonly IDistributedCache<List<Entities.Booking>> _bookingCache;
+        private readonly IDistributedCache<IQueryable<Entities.Booking>> _bookingCache;
 
         public BookingApplicationService(IRepository<Entities.Booking, Guid> bookingRepository,
             IRepository<Entities.Flight, Guid> flightRepository, IBookingManager bookingManager,
-            IDistributedCache<List<Entities.Flight>> flightCache, IDistributedCache<List<Entities.Booking>> bookingCache)
+            IDistributedCache<IQueryable<Entities.Booking>> bookingCache)
         {
             _bookingRepository = bookingRepository;
             _flightRepository = flightRepository;
             _bookingManager = bookingManager;
-            _flightCache = flightCache;
             _bookingCache = bookingCache;
         }
 
         public async Task CreateBookingAsync(CreateBookingDto dto, CancellationToken token)
         {
-            var flight = await AddFlights(dto, token);
+            var flight = await AddFlight(dto, token);
 
             var booking = await _bookingManager.CreateBookingAsync(
-                dto.BookingDate, dto.UserId,
-                flight);
+                dto.BookingDate, dto.UserId, flight);
 
             await _bookingRepository.InsertAsync(booking, cancellationToken: token);
         }
 
-        private async Task<Entities.Flight> AddFlights(CreateBookingDto dto, CancellationToken token)
+        private async Task<Entities.Flight> AddFlight(CreateBookingDto dto, CancellationToken token)
         {
             var flight = new Entities.Flight(Guid.NewGuid())
             {
@@ -61,9 +59,15 @@ namespace Stupeni.FSA.Booking
 
         public async Task<List<BookingDto>> GetBookingsByUserIdAsync(Guid userId, CancellationToken token)
         {
-            var query = await _bookingRepository.GetQueryableAsync();
+            var bookingQuery = await _bookingCache.GetOrAddAsync(
+                "bookingQuery",
+                async () => await _bookingRepository.GetQueryableAsync(),
+                () => new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpiration = DateTimeOffset.Now.AddHours(1)
+                }, null, false, token);
 
-            var bookings = query.Where(x => x.UserId == userId).ToList();
+            var bookings = bookingQuery.Where(x => x.UserId == userId).ToList();
 
             foreach (var  booking in bookings)
             {
