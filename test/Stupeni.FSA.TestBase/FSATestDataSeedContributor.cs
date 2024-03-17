@@ -17,7 +17,8 @@ public class FSATestDataSeedContributor : IDataSeedContributor, ITransientDepend
         _bookingRepository = bookingRepository;
     }
 
-    public async Task SeedAsync(DataSeedContext context)
+    public Task SeedAsync(DataSeedContext context)
     {
+        return Task.CompletedTask;
     }
 }

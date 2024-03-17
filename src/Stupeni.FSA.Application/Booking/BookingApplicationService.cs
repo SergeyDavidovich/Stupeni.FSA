@@ -33,8 +33,7 @@ namespace Stupeni.FSA.Booking
         {
             var flight = await AddFlight(dto, token);
 
-            var booking = _bookingManager.CreateBookingAsync(
-                dto.BookingDate, dto.UserId, flight);
+            var booking = _bookingManager.CreateBooking(dto.BookingDate, dto.UserId, flight);
 
             await _bookingRepository.InsertAsync(booking, cancellationToken: token);
         }

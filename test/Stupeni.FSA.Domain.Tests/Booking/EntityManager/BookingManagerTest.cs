@@ -17,7 +17,7 @@ namespace Stupeni.FSA.Booking.EntityManager
     public class BookingManagerTest
     {
         [Fact]
-        public async Task ShouldCreateBookingSuccessfully()
+        public void ShouldCreateBookingSuccessfully()
         {
             var guid = Guid.NewGuid();
             var flight = new Flight(guid);
@@ -27,15 +27,15 @@ namespace Stupeni.FSA.Booking.EntityManager
 
             flight.DaysOfOperation.Add(DayOfWeek.Monday);
 
-            //var booking = await manager.CreateBookingAsync(bookingDate, Guid.NewGuid(), new List<Flight>() { flight }, default);
+            var booking = manager.CreateBooking(bookingDate, Guid.NewGuid(), flight);
 
-            //booking.Flights.ShouldContain(flight);
-            //booking.FlightIds.ShouldContain(flight.Id);
-            //booking.ShouldNotBeNull();
+            booking.Flight.ShouldBe(flight);
+            booking.FlightId.ShouldBe(flight.Id);
+            booking.ShouldNotBeNull();
         }
 
         [Fact]
-        public async Task ShouldThrowIfNoFlightOnBookedDate()
+        public void ShouldThrowIfNoFlightOnBookedDate()
         {
             var guid = Guid.NewGuid();
             var flight = new Flight(guid);
@@ -45,8 +45,8 @@ namespace Stupeni.FSA.Booking.EntityManager
 
             flight.DaysOfOperation.Add(DayOfWeek.Tuesday);
 
-            //var func = () => manager.CreateBookingAsync(bookingDate, Guid.NewGuid(), new List<Flight>() { flight }, default);
-            //await func.ShouldThrowAsync<FlightNotOperatOnBookedDate>();
+            var func = () => manager.CreateBooking(bookingDate, Guid.NewGuid(), flight);
+            func.ShouldThrow<FlightNotOperatOnBookedDate>();
         }
     }
 }

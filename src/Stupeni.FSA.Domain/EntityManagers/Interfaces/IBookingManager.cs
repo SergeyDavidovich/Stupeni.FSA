@@ -5,6 +5,6 @@ namespace Stupeni.FSA.EntityManagers.Interfaces
 {
     public interface IBookingManager
     {
-        public Booking CreateBookingAsync(DateTime bookingDate, Guid userId, Flight bookedFlight);
+        public Booking CreateBooking(DateTime bookingDate, Guid userId, Flight bookedFlight);
     }
 }

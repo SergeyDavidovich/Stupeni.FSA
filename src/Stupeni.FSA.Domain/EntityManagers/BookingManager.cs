@@ -9,7 +9,7 @@ namespace Stupeni.FSA.EntityManagers
 {
     public class BookingManager : DomainService, IBookingManager
     {
-        public Booking CreateBookingAsync(DateTime bookingDate, Guid userId, Flight bookedFlight)
+        public Booking CreateBooking(DateTime bookingDate, Guid userId, Flight bookedFlight)
         {
             var booking = new Booking(Guid.NewGuid(), userId, bookingDate);
 
