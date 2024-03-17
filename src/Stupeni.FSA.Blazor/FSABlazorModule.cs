@@ -30,8 +30,7 @@ namespace Stupeni.FSA.Blazor;
     typeof(AbpAspNetCoreComponentsWebAssemblyBasicThemeModule),
     typeof(AbpIdentityBlazorWebAssemblyModule),
     typeof(AbpTenantManagementBlazorWebAssemblyModule),
-    typeof(AbpSettingManagementBlazorWebAssemblyModule),
-    typeof(AbpLocalizationModule)
+    typeof(AbpSettingManagementBlazorWebAssemblyModule)
 )]
 public class FSABlazorModule : AbpModule
 {

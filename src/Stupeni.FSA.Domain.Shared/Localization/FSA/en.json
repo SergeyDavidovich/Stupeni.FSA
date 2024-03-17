@@ -22,6 +22,7 @@
     "BookFlightButtonText": "Book flight",
     "BookingId": "Booking number",
     "ArrivalTime": "Arrival time",
-    "FlightInfo": "Flight info"
+    "FlightInfo": "Flight info",
+    "TimeoutMessage": "Waiting limit is exceed"
   }
 }

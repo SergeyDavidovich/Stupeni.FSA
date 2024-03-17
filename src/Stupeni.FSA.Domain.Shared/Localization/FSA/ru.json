@@ -22,6 +22,7 @@
     "BookFlightButtonText": "Забронировать",
     "BookingId": "Номер бронирования",
     "ArrivalTime": "Время прибытия",
-    "FlightInfo": "Информация о полёте"
+    "FlightInfo": "Информация о полёте",
+    "TimeoutMessage": "Время ожидание превышено"
   }
 }

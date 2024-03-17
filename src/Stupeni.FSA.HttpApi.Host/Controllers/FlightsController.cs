@@ -4,6 +4,10 @@ using System;
 using Volo.Abp.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Stupeni.FSA.Flights;
+using System.Collections.Generic;
+using Stupeni.FSA.Flights.Dto;
+using Microsoft.AspNetCore.Http;
+using System.Net.Mime;
 
 namespace Stupeni.FSA.Controllers
 {
@@ -19,7 +23,9 @@ namespace Stupeni.FSA.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetFlights(DateTime departureDate, string deaprtureCity, string destinationCity, double minimumPrice, double maximumPrice, CancellationToken token)
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType<IEnumerable<FlightDto>>(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<FlightDto>>> GetFlights(DateTime departureDate, string deaprtureCity, string destinationCity, double minimumPrice, double maximumPrice, CancellationToken token)
         {
             try
             {
