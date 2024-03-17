@@ -1,17 +1,15 @@
-﻿using Stupeni.FSA.Entities;
-using Stupeni.FSA.Flights.DataSource;
+﻿using Stupeni.FSA.Flights.DataSource;
 using Stupeni.FSA.Flights.Dto;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
-using Volo.Abp.DependencyInjection;
 
 namespace Stupeni.FSA.DataSource
 {
     public class WorldwideFlightsDataSource : IWorldwideFlightsSource
     {
-        public async Task<IEnumerable<FlightDto>> GetFlightsAsync()
+        public async Task<IEnumerable<FlightDto>> GetFlightsAsync(CancellationToken token)
         {
             await Task.CompletedTask;
 

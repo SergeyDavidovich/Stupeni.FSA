@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Stupeni.FSA.DataSource;
 using Stupeni.FSA.Flights.DataSource;
 using Volo.Abp.Account;
@@ -9,6 +9,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
+using Volo.Abp.Caching;
 
 namespace Stupeni.FSA;
 
@@ -22,7 +23,8 @@ namespace Stupeni.FSA;
     typeof(AbpFeatureManagementApplicationModule),
     typeof(AbpSettingManagementApplicationModule)
     )]
-public class FSAApplicationModule : AbpModule
+[DependsOn(typeof(AbpCachingModule))]
+    public class FSAApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

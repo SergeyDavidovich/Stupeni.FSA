@@ -50,10 +50,13 @@ namespace Stupeni.FSA.Entities
         public string CarrierName { get; set; }
 
         /// <summary>
+        /// Цена на рейс
+        /// </summary>
+        public double Price { get; set; }
+
+        /// <summary>
         /// Навигационное свойство
         /// </summary>
-        public Booking Booking { get; set; }
-
-        public double Price { get; set; }
+        public Booking? Booking { get; set; }
     }
 }

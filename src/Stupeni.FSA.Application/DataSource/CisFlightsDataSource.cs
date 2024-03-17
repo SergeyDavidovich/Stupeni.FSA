@@ -2,16 +2,14 @@
 using Stupeni.FSA.Flights.Dto;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using Volo.Abp.DependencyInjection;
 
 namespace Stupeni.FSA.DataSource
 {
     public class CisFlightsDataSource : ICISFlightsSource
     {
-        public async Task<IEnumerable<FlightDto>> GetFlightsAsync()
+        public async Task<IEnumerable<FlightDto>> GetFlightsAsync(CancellationToken token)
         {
             await Task.CompletedTask;
 
@@ -24,7 +22,7 @@ namespace Stupeni.FSA.DataSource
                     DestinationCity = "Almata",
                     ArrivalTime = new TimeSpan(1,0,0),
                     DepartureTime = new TimeSpan(2,0,0),
-                    DaysOfOperation = new List<DayOfWeek>(){DayOfWeek.Monday},
+                    DaysOfOperation = new List<DayOfWeek>(){DayOfWeek.Sunday},
                     CarrierName = "UZA",
                     Price = 100
                 },
