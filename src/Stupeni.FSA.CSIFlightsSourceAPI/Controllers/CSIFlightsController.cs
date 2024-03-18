@@ -11,10 +11,10 @@ namespace Stupeni.FSA.CSIFlightsSourceAPI.Controllers
     public class CSIFlightsController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
             using StreamReader r = new StreamReader("flights.json");
-            string json = r.ReadToEnd();
+            string json = await  r.ReadToEndAsync();
 
             return Ok(json);
         }
