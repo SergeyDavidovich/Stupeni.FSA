@@ -22,6 +22,9 @@ namespace Stupeni.FSA.Entities
         /// </summary>
         public DateTime BookingDate { get; private set; }
 
+        /// <summary>
+        /// Идентификатор пользователя осуществившего бронирование
+        /// </summary>
         public Guid UserId { get; private set; }
 
         public Guid FlightId { get; internal set; }
