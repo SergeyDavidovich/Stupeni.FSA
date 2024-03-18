@@ -1,0 +1,6 @@
+@Stupeni.FSA.CSIFlightsSourceAPI_HostAddress = http://localhost:5170
+
+GET {{Stupeni.FSA.CSIFlightsSourceAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

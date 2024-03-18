@@ -1,0 +1,112 @@
+[
+  {
+    "flightNumber": "AB123",
+    "daysOfOperation": [ "Monday", "Wednesday", "Friday" ],
+    "departureCity": "Moscow",
+    "destinationCity": "Almata",
+    "departureTime": "08:00:00",
+    "arrivalTime": "14:00:00",
+    "carrierName": "Airline XYZ",
+    "price": 500
+  },
+  {
+    "flightNumber": "AB123",
+    "daysOfOperation": [ "Sunday", "Monday", "Wednesday", "Friday" ],
+    "departureCity": "Tashkent",
+    "destinationCity": "Almata",
+    "departureTime": "08:00:00",
+    "arrivalTime": "14:00:00",
+    "carrierName": "Airline XYZ",
+    "price": 300
+  },
+  {
+    "flightNumber": "CD456",
+    "daysOfOperation": [ "Tuesday", "Thursday", "Saturday" ],
+    "departureCity": "Kiev",
+    "destinationCity": "Minsk",
+    "departureTime": "09:30:00",
+    "arrivalTime": "17:30:00",
+    "carrierName": "Airline XYZ",
+    "price": 600
+  },
+  {
+    "flightNumber": "EF789",
+    "daysOfOperation": [ "Monday", "Wednesday", "Friday" ],
+    "departureCity": "Almata",
+    "destinationCity": "Tashkent",
+    "departureTime": "11:00:00",
+    "arrivalTime": "16:00:00",
+    "carrierName": "Airline XYZ",
+    "price": 800
+  },
+  {
+    "flightNumber": "GH012",
+    "daysOfOperation": [ "Tuesday", "Thursday", "Saturday" ],
+    "departureCity": "Baku",
+    "destinationCity": "Tbilisi",
+    "departureTime": "13:45:00",
+    "arrivalTime": "21:30:00",
+    "carrierName": "Airline XYZ",
+    "price": 900
+  },
+  {
+    "flightNumber": "IJ345",
+    "daysOfOperation": [ "Monday", "Wednesday", "Friday" ],
+    "departureCity": "Dushanbe",
+    "destinationCity": "Bishkek",
+    "departureTime": "16:20:00",
+    "arrivalTime": "08:00:00",
+    "carrierName": "Airline XYZ",
+    "price": 1000
+  },
+  {
+    "flightNumber": "KL678",
+    "daysOfOperation": [ "Monday", "Thursday", "Saturday" ],
+    "departureCity": "Samarkand",
+    "destinationCity": "Erevan",
+    "departureTime": "07:30:00",
+    "arrivalTime": "13:30:00",
+    "carrierName": "Airline XYZ",
+    "price": 550
+  },
+  {
+    "flightNumber": "MN910",
+    "daysOfOperation": [ "Tuesday", "Thursday", "Sunday" ],
+    "departureCity": "Ashgabat",
+    "destinationCity": "Astana",
+    "departureTime": "10:15:00",
+    "arrivalTime": "16:45:00",
+    "carrierName": "Airline XYZ",
+    "price": 700
+  },
+  {
+    "flightNumber": "OP111",
+    "daysOfOperation": [ "Wednesday", "Friday", "Sunday" ],
+    "departureCity": "Tashkent",
+    "destinationCity": "Minsk",
+    "departureTime": "14:00:00",
+    "arrivalTime": "20:30:00",
+    "carrierName": "Airline XYZ",
+    "price": 850
+  },
+  {
+    "flightNumber": "QR121",
+    "daysOfOperation": [ "Monday", "Thursday", "Saturday" ],
+    "departureCity": "Dushanbe",
+    "destinationCity": "Kiev",
+    "departureTime": "16:40:00",
+    "arrivalTime": "22:15:00",
+    "carrierName": "Airline XYZ",
+    "price": 950
+  },
+  {
+    "flightNumber": "ST314",
+    "daysOfOperation": [ "Tuesday", "Wednesday", "Friday" ],
+    "departureCity": "Bishkek",
+    "destinationCity": "Moscow",
+    "departureTime": "18:30:00",
+    "arrivalTime": "23:45:00",
+    "carrierName": "Airline XYZ",
+    "price": 1100
+  }
+]
