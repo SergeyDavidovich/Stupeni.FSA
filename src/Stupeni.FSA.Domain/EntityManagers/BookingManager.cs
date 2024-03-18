@@ -2,7 +2,6 @@
 using Stupeni.FSA.EntityManagers.Interfaces;
 using Stupeni.FSA.Exceptions;
 using System;
-using System.Threading.Tasks;
 using Volo.Abp.Domain.Services;
 
 namespace Stupeni.FSA.EntityManagers
