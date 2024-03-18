@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.IO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Stupeni.FSA.WorlwideFlightsSourceAPI.Controllers
+namespace Stupeni.FSA.CSIFlightsSourceAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FlightsController : ControllerBase
+    public class CSIFlightsController : ControllerBase
     {
-        // GET: api/<FlightsController>
         [HttpGet]
         public IActionResult Get()
         {
