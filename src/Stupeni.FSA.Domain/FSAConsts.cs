@@ -1,4 +1,6 @@
-﻿namespace Stupeni.FSA;
+﻿using System;
+
+namespace Stupeni.FSA;
 
 public static class FSAConsts
 {

@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
-using Stupeni.FSA.DataSource;
-using Stupeni.FSA.Flights.DataSource;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Sqlite;
@@ -37,8 +35,6 @@ public class FSAEntityFrameworkCoreTestModule : AbpModule
             options.IsDynamicPermissionStoreEnabled = false;
         });
         context.Services.AddAlwaysDisableUnitOfWorkTransaction();
-        context.Services.AddSingleton<ICISFlightsSource, CisFlightsDataSource>();
-        context.Services.AddSingleton<IWorldwideFlightsSource, WorldwideFlightsDataSource>();
 
         ConfigureInMemorySqlite(context.Services);
     }

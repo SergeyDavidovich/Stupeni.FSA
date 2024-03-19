@@ -1,6 +1,7 @@
 ﻿@page "/booking"
 @using Microsoft.Extensions.Localization
 @using Newtonsoft.Json
+@using Stupeni.FSA;
 @using Stupeni.FSA.Blazor.Components
 @using Stupeni.FSA.Blazor.Models
 @using Stupeni.FSA.Booking
@@ -38,36 +39,44 @@
     {
         ClearFlightsListIfAny();
 
-        var httpClient = new HttpClient();
-
-        string query = "https://localhost:44389/api/Flights?"
-                        + $"departureDate={data.DepartureDate!.Value.Year}%2F{data.DepartureDate!.Value.Month}%2F{data.DepartureDate!.Value.Day}&"
-                        + $"deaprtureCity={data.DepartureCity}&"
-                        + $"destinationCity={data.DestinationCity}&"
-                        + $"minimumPrice={data.MinimalPrice ?? 0}&"
-                        + $"maximumPrice={data.MaximalPrice ?? double.MaxValue}";
-
-        var result = await httpClient.GetAsync(query);
-
-        if (result.StatusCode == System.Net.HttpStatusCode.GatewayTimeout)
+        var cancellationToken = new CancellationToken();
+        try
         {
-            await messageService.Error(localizer["TimeoutMessage"]);
-            return;
+            await FillFlights(data, cancellationToken);
+
+            await ShowMessageIfNoMatchingFlights();
+        }
+        catch (Exception e)
+        {
+            await messageService.Error(e.Message);
         }
 
-        var sourceFlights = JsonConvert.DeserializeObject<List<FlightDto>>(await result.Content.ReadAsStringAsync());
+        StateHasChanged();
+    }
+
+    private async Task ShowMessageIfNoMatchingFlights()
+    {
+        if (!flights.Any())
+        {
+            await messageService.Info(localizer["NoMatchingFlight"]);
+        }
+    }
+
+    private async Task FillFlights(BookingData data, CancellationToken cancellationToken)
+    {
+        // It is known issue. Read here please - https://support.abp.io/QA/Questions/6011/Different-value-for-DateTime-Picker-and-api-request-parameter
+        var sourceFlights = await flightApplicationService.GetFlightsAsync(
+            new DateTime(data.DepartureDate!.Value.Year, data.DepartureDate!.Value.Month, data.DepartureDate!.Value.Day + 1),
+            data.DepartureCity,
+            data.DestinationCity,
+            data.MinimalPrice ?? FlightsConstants.MinimalFlightPrice,
+            data.MinimalPrice ?? FlightsConstants.MinimalFlightPrice,
+            cancellationToken);
 
         foreach (var flight in sourceFlights)
         {
             flights.Add(flight);
         }
-
-        if (!flights.Any())
-        {
-            await messageService.Info(localizer["NoMatchingFlight"]);
-        }
-
-        StateHasChanged();
     }
 
     private void ClearFlightsListIfAny()
