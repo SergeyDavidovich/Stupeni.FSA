@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Stupeni.FSA.Flights.Dto
 {
@@ -13,6 +14,7 @@ namespace Stupeni.FSA.Flights.Dto
         /// <summary>
         /// Дни полета
         /// </summary>
+        [JsonConverter(typeof(DayOfWeekConverter))]
         public List<DayOfWeek> DaysOfOperation { get; set; }
 
         /// <summary>

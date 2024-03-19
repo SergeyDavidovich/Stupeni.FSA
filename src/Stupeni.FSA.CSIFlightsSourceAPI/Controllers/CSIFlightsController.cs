@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.IO;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Stupeni.FSA.CSIFlightsSourceAPI.Controllers
 {
@@ -14,7 +10,7 @@ namespace Stupeni.FSA.CSIFlightsSourceAPI.Controllers
         public async Task<IActionResult> Get()
         {
             using StreamReader r = new StreamReader("flights.json");
-            string json = await  r.ReadToEndAsync();
+            string json = await r.ReadToEndAsync();
 
             return Ok(json);
         }
